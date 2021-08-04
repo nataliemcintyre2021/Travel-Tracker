@@ -3,12 +3,16 @@ class Trips {
     this.data = allUserTrips;
   }
 
-  getUserTripsById() {
-
+  getTravelerTripsById(userId) {
+    const travelerTrips = this.data.filter(trip => userId === trip["userID"]);
+    return travelerTrips;
   }
 
-  getUserPastTrips() {
-
+  getTravelerPastTrips(userId) {
+    const now = Date.now();
+    const pastTravelerTrips = this.data.filter(trip => (userId === trip["userID"]) && (Date.parse(trip["date"]) < now))
+    console.log("PAST>>>", pastTravelerTrips)
+    return pastTravelerTrips;
   }
 
   getUserPresentTrips() {
@@ -20,7 +24,7 @@ class Trips {
   }
 
   getUserPendingTrips() {
-    
+
   }
 }
 
@@ -31,4 +35,4 @@ class Trips {
 
 
 
-export default Traveler;
+export default Trips;
