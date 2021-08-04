@@ -1,3 +1,5 @@
+// @import './_normalize.css';
+
 /* This is an example of using Sass, otherwise plain CSS works too*/
 // $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 // ;
@@ -5,3 +7,541 @@
 // body {
 //   background: $primary-background;
 // }
+// *,
+// *:after,
+// *:before {
+//   box-sizing: border-box;
+//   margin: 0px;
+//   padding: 0px;
+// }
+
+* {
+  font-family: 'Bitter', serif;
+
+}
+
+html {
+  overflow-y: scroll;
+  // overflow-x: scroll;
+  height: 100%;
+  width: 100%;
+  background: #F0803C;
+  color: #434952;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background: #F0803C;
+  color: #434952;
+}
+
+// body {
+//   background: #F0803C;
+// }
+
+.login-page {
+  height: 100%;
+  width: 100%;
+  // border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.username,
+.password {
+  display: flex;
+  flex-direction: column;
+}
+.submit {
+  margin: 5px;
+  text-align: center;
+}
+
+.logo2 {
+  // border: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-trip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+.make-trip-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // border: 2px solid black;
+}
+
+.date,
+.duration-input,
+.number-travelers,
+.selector {
+  display: flex;
+  flex-direction: column;
+  max-width: 12%;
+  margin: 2px;
+}
+.submit-trip {
+  margin: 5px;
+}
+
+.all-trips {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  // border: 2px solid black;
+}
+
+.pending-trip-section {
+  // border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  // height: 25%
+  // width: 20%;
+}
+
+.pending-container {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+  // border: 3px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  // position: relative;
+  // overflow: hidden;
+  grid-gap: 10px;
+  grid-template-areas:
+  "pending-trip-1 pending-trip-2 pending-trip-3"
+  "pending-trip-4 pending-trip-5 pending-trip-6"
+}
+
+.pending-trip-1 {
+  background: white;
+  // border-radius: 2px;
+  grid-area: pending-trip-1;
+  // position: relative;
+  // min-width: 10%;
+  // min-height: 10%;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  // margin: 2px;
+  margin: 0;
+}
+
+.pending-trip-2 {
+  background: white;
+  border-radius: 2px;
+  grid-area: pending-trip-2;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.pending-trip-3 {
+  background: white;
+  border-radius: 2px;
+  grid-area: pending-trip-3;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.pending-trip-4 {
+  background: white;
+  border-radius: 2px;
+  grid-area: pending-trip-4;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.pending-trip-5 {
+  background: white;
+  border-radius: 2px;
+  grid-area: pending-trip-5;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.pending-trip-6 {
+  // border: 2px solid purple;
+  background: white;
+  border-radius: 2px;
+  grid-area: pending-trip-6;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.present-trip-section {
+  // border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  // height: 25%
+  // width: 20%;
+}
+
+.present-container {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+  // border: 3px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  // position: relative;
+  // overflow: hidden;
+  grid-gap: 10px;
+  grid-template-areas:
+  "present-trip-1 present-trip-2 present-trip-3"
+  "present-trip-4 present-trip-5 present-trip-6"
+}
+
+.present-trip-1 {
+  background: white;
+  // border-radius: 2px;
+  grid-area: present-trip-1;
+  // position: relative;
+  // min-width: 10%;
+  // min-height: 10%;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  // margin: 2px;
+  margin: 0;
+}
+
+.present-trip-2 {
+  background: white;
+  border-radius: 2px;
+  grid-area: present-trip-2;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.present-trip-3 {
+  background: white;
+  border-radius: 2px;
+  grid-area: present-trip-3;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.present-trip-4 {
+  background: white;
+  border-radius: 2px;
+  grid-area: present-trip-4;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.present-trip-5 {
+  background: white;
+  border-radius: 2px;
+  grid-area: present-trip-5;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.present-trip-6 {
+  // border: 2px solid purple;
+  background: white;
+  border-radius: 2px;
+  grid-area: present-trip-6;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+
+
+
+.upcoming-trip-section {
+  // border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  // height: 25%
+  // width: 20%;
+}
+
+.upcoming-container {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+  // border: 3px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  // position: relative;
+  // overflow: hidden;
+  grid-gap: 10px;
+  grid-template-areas:
+  "upcoming-trip-1 upcoming-trip-2 upcoming-trip-3"
+  "upcoming-trip-4 upcoming-trip-5 upcoming-trip-6"
+}
+
+.upcoming-trip-1 {
+  background: white;
+  // border-radius: 2px;
+  grid-area: upcoming-trip-1;
+  // position: relative;
+  // min-width: 10%;
+  // min-height: 10%;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  // margin: 2px;
+  margin: 0;
+}
+
+.upcoming-trip-2 {
+  background: white;
+  border-radius: 2px;
+  grid-area: upcoming-trip-2;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.upcoming-trip-3 {
+  background: white;
+  border-radius: 2px;
+  grid-area: upcoming-trip-3;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.upcoming-trip-4 {
+  background: white;
+  border-radius: 2px;
+  grid-area: upcoming-trip-4;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.upcoming-trip-5 {
+  background: white;
+  border-radius: 2px;
+  grid-area: upcoming-trip-5;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.upcoming-trip-6 {
+  // border: 2px solid purple;
+  background: white;
+  border-radius: 2px;
+  grid-area: upcoming-trip-6;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+
+
+
+
+.past-trip-section {
+  // border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  // height: 25%
+  // width: 20%;
+}
+
+.past-container {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+  // border: 3px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  // position: relative;
+  // overflow: hidden;
+  grid-gap: 10px;
+  grid-template-areas:
+  "past-trip-1 past-trip-2 past-trip-3"
+  "past-trip-4 past-trip-5 past-trip-6"
+}
+
+.past-trip-1 {
+  background: white;
+  // border-radius: 2px;
+  grid-area: past-trip-1;
+  // position: relative;
+  // min-width: 10%;
+  // min-height: 10%;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  // margin: 2px;
+  margin: 0;
+}
+
+.past-trip-2 {
+  background: white;
+  border-radius: 2px;
+  grid-area: past-trip-2;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.past-trip-3 {
+  background: white;
+  border-radius: 2px;
+  grid-area: past-trip-3;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.past-trip-4 {
+  background: white;
+  border-radius: 2px;
+  grid-area: past-trip-4;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.past-trip-5 {
+  background: white;
+  border-radius: 2px;
+  grid-area: past-trip-5;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.past-trip-6 {
+  // border: 2px solid purple;
+  background: white;
+  border-radius: 2px;
+  grid-area: past-trip-6;
+  // position: relative;
+  // min-width: 0;
+  // min-height: 0;
+  // object-fit: fill;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}

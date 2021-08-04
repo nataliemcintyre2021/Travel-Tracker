@@ -4,13 +4,122 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+  <title>Travel Tracker</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-  
+  <!-- LOG-IN PAGE -->
+  <section class="login-page hidden">
+    <header class="logo">
+      <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+    </header>
+    <main>
+      <form class="login-form">
+        <div class="username">
+          <label for="username">Username: </label>
+          <input type="text" name="username" required/>
+        </div>
+        <div class="password">
+          <label for="password"> Password:  </label>
+          <input type="text" name="password" required/>
+        </div>
+        <div class="submit">
+          <input type="submit" value="Log In"/>
+        </div>
+      </form>
+    </main>
+  </section>
+
+  <!-- USER PAGE -->
+
+  <section class="trips-page">
+    <header class="logo2">
+      <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+    </header>
+    <main>
+      <section class="request-form">
+        <h3 class="book-trip">Make a Trip Request: </h3>
+        <form class="make-trip-form">
+          <div class="date">
+            <label for="date">Select Trip Start Date: </label>
+            <input class="date-selector" type="date" name="date" value="2021-08-03"/>
+          </div>
+          <div class="duration-input">
+            <label for="duration">Number of Days: </label>
+            <input type="number" name="duration"/>
+          </div>
+          <div class="number-travelers">
+            <label for="number-of-travelers">Number of Travelers: </label>
+            <input type="number" name="number-of-travelers"/>
+          </div>
+          <div class="selector">
+            <label for="destinations">Select Destination:</label>
+            <select name="destinations">
+              <option value="Destination">Destination</option>
+              <option value="Destination">Destination</option>
+              <option value="Destination">Destination</option>
+              <option value="Destination">Destination</option>
+            </select>
+          </div>
+          <div class="submit-trip">
+            <input type="submit" value="Submit"/>
+          </div>
+        </form>
+      </section>
+      <section class="all-trips">
+        <h2>My Trips</h2>
+      </section>
+      <section class="pending-trip-section">
+        <h3>Pending Trips</h3>
+        <section class="pending-container">
+          <div class="pending-trip-1">Pending-Trip-1</div>
+          <div class="pending-trip-2">Pending-Trip-2</div>
+          <div class="pending-trip-3">Pending-Trip-3</div>
+          <div class="pending-trip-4">Pending-Trip-4</div>
+          <div class="pending-trip-5">Pending-Trip-5</div>
+          <div class="pending-trip-6">Pending-Trip-6</div>
+        </section>
+      </section>
+      <section class="present-trip-section">
+        <h3>Present Trips</h3>
+        <section class="present-container">
+          <div class="present-trip-1">Present-Trip</div>
+          <div class="present-trip-2">Present-Trip</div>
+          <div class="present-trip-3">Present-Trip</div>
+          <div class="present-trip-4">Present-Trip</div>
+          <div class="present-trip-5">Present-Trip</div>
+          <div class="present-trip-6">Present-Trip</div>
+        </section>
+      </section>
+      <section class="upcoming-trip-section">
+        <h3>Upcoming Trips</h3>
+        <section class="upcoming-container">
+          <div class="upcoming-trip-1"></div>
+          <div class="upcoming-trip-2"></div>
+          <div class="upcoming-trip-3"></div>
+          <div class="upcoming-trip-4"></div>
+          <div class="upcoming-trip-5"></div>
+          <div class="upcoming-trip-6"></div>
+        </section>
+      </section>
+      <section class="past-trip-section">
+        <h3>Past Trips</h3>
+        <section class="past-container">
+          <div class="past-trip-1"></div>
+          <div class="past-trip-2"></div>
+          <div class="past-trip-3"></div>
+          <div class="past-trip-4"></div>
+          <div class="past-trip-5"></div>
+          <div class="past-trip-6"></div>
+        </section>
+      </section>
+    </main>
+  </section>
+
+
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
