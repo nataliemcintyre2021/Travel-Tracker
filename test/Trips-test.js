@@ -16,6 +16,16 @@ describe('Trips', () => {
         "status": "approved",
         "suggestedActivities": []
       },
+      // {
+      //   "id": 3,
+      //   "userID": 3,
+      //   "destinationID": 22,
+      //   "travelers": 4,
+      //   "date": "2021/08/04",
+      //   "duration": 17,
+      //   "status": "approved",
+      //   "suggestedActivities": []
+      // },
       {
         "id": 41,
         "userID": 3,
@@ -145,4 +155,60 @@ describe('Trips', () => {
 
     expect(pastTrips).to.deep.equal(traveler3PastTrips);
   })
+
+  it('should return traveler trips that are upcoming', function () {
+
+    const traveler3UpcomingTrips = [
+      {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 22,
+        "travelers": 4,
+        "date": "2022/05/22",
+        "duration": 17,
+        "status": "approved",
+        "suggestedActivities": []
+      }];
+
+    const upcomingTrips = tripsRepo.getTravelerUpcomingTrips(3);
+
+    expect(upcomingTrips).to.deep.equal(traveler3UpcomingTrips);
+  })
+
+  it('should return travel trips in the past year', function () {
+    const traveler50LastYearTrips = [
+    {
+      "id": 43,
+      "userID": 50,
+      "destinationID": 42,
+      "travelers": 4,
+      "date": "2021/01/09",
+      "duration": 5,
+      "status": "approved",
+      "suggestedActivities": []
+    }];
+
+    const lastYearTrips = tripsRepo.getLastYearsTravelersTrips(50);
+
+    expect(lastYearTrips).to.deep.equal(traveler50LastYearTrips);
+  })
+
+  // it('should return traveler trips that are present', function () {
+  //
+  //   const traveler3PresentTrips = [
+  //     {
+  //       "id": 3,
+  //       "userID": 3,
+  //       "destinationID": 22,
+  //       "travelers": 4,
+  //       "date": "2021/08/04",
+  //       "duration": 17,
+  //       "status": "approved",
+  //       "suggestedActivities": []
+  //     }];
+  //
+  //   const presentTrips = tripsRepo.getTravelerPresentTrips(3);
+  //
+  //   expect(upcomingTrips).to.deep.equal(traveler3PresentTrips);
+  // })
 })
