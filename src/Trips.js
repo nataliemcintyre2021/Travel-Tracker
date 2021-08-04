@@ -28,7 +28,7 @@ class Trips {
   getLastYearsTravelersTripExpenses(userId, destinationData) {
     // const tripDestinationsOverLastYear = [];
 
-    const lastYearTrips = this.data.getLastYearsTravelersTrips(userId);
+    let lastYearTrips = this.getLastYearsTravelersTrips(userId);
 
     const tripCostsByDestinationOverLastYear = lastYearTrips.reduce((acc, trip) => {
       destinationData.forEach(destination => {
@@ -37,9 +37,11 @@ class Trips {
         }
       })
       return acc;
-    }, 0) * .1;
-
-    return tripCostsByDestinationOverLastYear;
+    }, 0)
+    const travelAgentFee = tripCostsByDestinationOverLastYear * .1;
+    const finalCost = tripCostsByDestinationOverLastYear + travelAgentFee;
+    console.log("FINAL COST", finalCost)
+    return finalCost;
 
     // const totalCost = tripDestinationsOverLastYear.reduce((acc, destination) => {
     //

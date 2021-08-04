@@ -193,6 +193,55 @@ describe('Trips', () => {
     expect(lastYearTrips).to.deep.equal(traveler50LastYearTrips);
   })
 
+  it('should calcuate amount traveler spent on trips this year including agent fee', function () {
+    const destinationData = [
+      {
+        "id":1,
+        "destination":"Lima, Peru",
+        "estimatedLodgingCostPerDay":70,
+        "estimatedFlightCostPerPerson":400,
+        "image":"https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        "alt":"overview of city buildings with a clear sky"
+      },
+      {
+        "id":16,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      },
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      },
+      {
+        "id":25,
+        "destination":"New York, New York",
+        "estimatedLodgingCostPerDay":175,
+        "estimatedFlightCostPerPerson":200,
+        "image":"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people crossing the street during the day surrounded by tall buildings and advertisements"
+      },
+      {
+        "id":42,
+        "destination":"Santo Domingo, Dominican Republic",
+        "estimatedLodgingCostPerDay":400,
+        "estimatedFlightCostPerPerson":80,
+        "image":"https://images.unsplash.com/photo-1510541383520-4daa77a666cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1782&q=80",
+        "alt":"aerial view of houses and high rise building"
+      }
+    ];
+
+    const yearsCost = tripsRepo.getLastYearsTravelersTripExpenses(50, destinationData);
+
+    expect(yearsCost).to.equal(2552);
+  })
+
   // it('should return traveler trips that are present', function () {
   //
   //   const traveler3PresentTrips = [
