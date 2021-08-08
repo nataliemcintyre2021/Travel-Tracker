@@ -23,6 +23,7 @@ let allDestinationData = [];
 const yearExpenses = document.getElementById('yearly-expenses');
 const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
+const presentContainer = document.getElementById('present');
 
 //event listeners
 
@@ -45,7 +46,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(3);
+  currentTraveler = travelersRepo.getDataByTravelerId(44);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
@@ -59,53 +60,64 @@ function getExpenses() {
 }
 
 function getTrips() {
-  let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id)
-  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(currentTraveler.id)
-  let pastDestinations = tripsRepo.getTravelerPastDestinations(currentTraveler.id, allDestinationData)
-  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(currentTraveler.id, allDestinationData)
-  console.log("")
+  let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id);
+  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(currentTraveler.id);
+  let presentTrips = tripsRepo.getTravelerPresentTrips(currentTraveler.id);
+  let pastDestinations = tripsRepo.getTravelerPastDestinations(currentTraveler.id, allDestinationData);
+  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(currentTraveler.id, allDestinationData);
+  let presentDestinations = tripsRepo.getTravelerPresentDestinations(currentTraveler.id, allDestinationData);
 
-  upcomingTrips.forEach(trip => {
-    let loopCounter = 1;
-    upcomingDestinations.forEach(destination => {
-      upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter}"><img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
-      loopCounter++;
+  let loopCounter1 = 1;
+  upcomingDestinations.forEach(destination => {
+    upcomingTrips.forEach(trip => {
+      if (destination.id === trip.destinationID) {
+      upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter1}"><img class="upcoming-img-${loopCounter1}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
+      loopCounter1++;
+    }
     })
   })
 
-  // pastTrips.forEach(trip => {
-    // pastContainer.innerHTML += '';
-     let loopCounter = 1;
-     // pastContainer.innerHTML +=
+    let loopCounter2 = 1;
      pastDestinations.forEach(destination => {
-       // if (trip["destinationID"] === destination["id"]) {
-       // let loopCounter = 1;
-       // if (trip["destinationID"] === destination["id"]) {
-       pastContainer.innerHTML +=
-       `<div class="past-trip-${loopCounter}">
-           <img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
-           <p class="destination">${destination.destination}</p>
+       pastTrips.forEach(trip => {
+         if (destination.id === trip.destinationID) {
+           pastContainer.innerHTML +=
+           `<div class="past-trip-${loopCounter2}">
+               <img class="upcoming-img-${loopCounter2}" id="img" src=${destination.image} alt="${destination.alt}">
+               <p class="destination">${destination.destination}</p>
+               <section class="trip-info">
+                  <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
+                  <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
+                  <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
+                </section>
 
-        </div>`
-       loopCounter++;
-     // }
-    // })
+            </div>`
+           loopCounter2++;
+         }
+       })
+     })
 
-   })
+     let loopCounter3 = 1;
+      presentDestinations.forEach(destination => {
+        presentTrips.forEach(trip => {
+          if (destination.id === trip.destinationID) {
+            presentContainer.innerHTML +=
+            `<div class="past-trip-${loopCounter3}">
+                <img class="upcoming-img-${loopCounter3}" id="img" src=${destination.image} alt="${destination.alt}">
+                <p class="destination">${destination.destination}</p>
+                <section class="trip-info">
+                   <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
+                   <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
+                   <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
+                 </section>
 
-   // pastTrips.forEach(trip => {
-   //
-   // })
- }
-   // <section class="trip-info">
-   //   <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
-   //   <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
-   //   <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
-   // </section>
+             </div>`
+            loopCounter3++;
+          }
+        })
+      })
 
 
 
 
-// function showExpensesThisYear() {
-//
-// }
+   }
