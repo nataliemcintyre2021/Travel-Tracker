@@ -74,7 +74,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(16);
+  currentTraveler = travelersRepo.getDataByTravelerId(50);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
@@ -94,80 +94,86 @@ function getExpenses() {
   let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(currentTraveler.id, allDestinationData)
   yearExpenses.innerText = `Amount spent on trips this year: $${userExpenses.toFixed(2)}`
 
-  getTrips();
+  getPastTrips();
+  getPresentTrips();
+  getUpcomingTrips();
 }
 
-function getTrips() {
+function getPastTrips() {
   let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id);
-  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(currentTraveler.id);
-  let presentTrips = tripsRepo.getTravelerPresentTrips(currentTraveler.id);
   let pastDestinations = tripsRepo.getTravelerPastDestinations(currentTraveler.id, allDestinationData);
-  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(currentTraveler.id, allDestinationData);
+
+  let loopCounter = 1;
+  if (pastDestinations.length > 0) {
+   pastDestinations.forEach(destination => {
+     pastTrips.forEach(trip => {
+       if (destination.id === trip.destinationID) {
+         pastContainer.innerHTML +=
+         `<div class="past-trip-${loopCounter}">
+             <img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
+             <p class="destination">${destination.destination}</p>
+             <section class="trip-info">
+                <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
+                <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
+                <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
+              </section>
+          </div>`
+         loopCounter++;
+       }
+     })
+   })
+ } else {
+   pastMessage.innerText = "You have no past trips to display. Head back to the main page to book a new trip!"
+ }
+}
+
+function getPresentTrips() {
+  let presentTrips = tripsRepo.getTravelerPresentTrips(currentTraveler.id);
   let presentDestinations = tripsRepo.getTravelerPresentDestinations(currentTraveler.id, allDestinationData);
 
-  let loopCounter1 = 1;
+  let loopCounter = 1;
+  if (presentDestinations.length > 0) {
+   presentDestinations.forEach(destination => {
+     presentTrips.forEach(trip => {
+       if (destination.id === trip.destinationID) {
+         presentContainer.innerHTML +=
+         `<div class="past-trip-${loopCounter}">
+             <img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
+             <p class="destination">${destination.destination}</p>
+             <section class="trip-info">
+                <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
+                <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
+                <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
+              </section>
+
+          </div>`
+         loopCounter++;
+       }
+     })
+   })
+ } else {
+   presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
+ }
+}
+
+function getUpcomingTrips() {
+  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(currentTraveler.id);
+  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(currentTraveler.id, allDestinationData);
+
+  let loopCounter = 1;
   if (upcomingDestinations.length > 0) {
   upcomingDestinations.forEach(destination => {
     upcomingTrips.forEach(trip => {
-      if (destination.id === trip.destinationID) {
-      upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter1}"><img class="upcoming-img-${loopCounter1}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
-      loopCounter1++;
+    if (destination.id === trip.destinationID) {
+    upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter}"><img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
+    loopCounter++;
     }
-    })
   })
-} else {
-    upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
-}
-
-    let loopCounter2 = 1;
-    if (pastDestinations.length > 0) {
-     pastDestinations.forEach(destination => {
-       pastTrips.forEach(trip => {
-         if (destination.id === trip.destinationID) {
-           pastContainer.innerHTML +=
-           `<div class="past-trip-${loopCounter2}">
-               <img class="upcoming-img-${loopCounter2}" id="img" src=${destination.image} alt="${destination.alt}">
-               <p class="destination">${destination.destination}</p>
-               <section class="trip-info">
-                  <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
-                  <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
-                  <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
-                </section>
-
-            </div>`
-           loopCounter2++;
-         }
-       })
-     })
-   } else {
-     pastMessage.innerText = "You have no past trips to display. Head back to the main page to book a new trip!"
-   }
-
-     let loopCounter3 = 1;
-     if (presentDestinations.length > 0) {
-      presentDestinations.forEach(destination => {
-        presentTrips.forEach(trip => {
-          if (destination.id === trip.destinationID) {
-            presentContainer.innerHTML +=
-            `<div class="past-trip-${loopCounter3}">
-                <img class="upcoming-img-${loopCounter3}" id="img" src=${destination.image} alt="${destination.alt}">
-                <p class="destination">${destination.destination}</p>
-                <section class="trip-info">
-                   <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
-                   <p class="trip-duration">Trip Duration: ${trip.duration} days</p>
-                   <p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p>
-                 </section>
-
-             </div>`
-            loopCounter3++;
-          }
-        })
-      })
+  })
     } else {
-      presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
+      upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
     }
-
-   }
+}
 
    function showPending() {
      loginArea.classList.add('hidden');
