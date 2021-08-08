@@ -11,7 +11,7 @@
 </head>
 <body>
   <!-- LOG-IN PAGE -->
-  <section class="login-page hidden">
+  <section class="login-page hidden" id="login-area">
     <header class="logo">
       <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
     </header>
@@ -34,68 +34,96 @@
 
   <!-- USER PAGE -->
 
-  <section class="trips-page">
+  <section class="trips-page" id="trips-area">
     <header class="logo2">
       <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
     </header>
+    <article class="greeting" id="greeting"></article>
     <main>
-      <p id="yearly-expenses">Total Expenses</p>
+      <!-- <p id="yearly-expenses">Total Expenses</p> -->
       <section class="request-form">
         <h3 class="book-trip">Make a Trip Request: </h3>
         <form class="make-trip-form">
           <div class="date">
-            <label for="date">Select Trip Start Date: </label>
+            <label for="date" class="date-text">Select Trip Start Date: </label>
             <input class="date-selector" type="date" name="date" value="2021-08-03"/>
           </div>
           <div class="duration-input">
-            <label for="duration">Number of Days: </label>
-            <input type="number" name="duration"/>
+            <label for="duration" class="duration-text">Number of Days: </label>
+            <input type="number" name="duration" required/>
           </div>
           <div class="number-travelers">
-            <label for="number-of-travelers">Number of Travelers: </label>
-            <input type="number" name="number-of-travelers"/>
+            <label for="number-of-travelers" class="travelers-text">Number of Travelers: </label>
+            <input type="number" name="number-of-travelers" required/>
           </div>
           <div class="selector">
-            <label for="destinations">Select Destination:</label>
-            <select name="destinations">
+            <label for="destinations" class="destinations-text">Select Destination:</label>
+            <select id="destination-selector" name="destinations">
+              <option value="Destination">Select Destination</option>
+              <!-- <option value="Destination">Destination</option>
               <option value="Destination">Destination</option>
-              <option value="Destination">Destination</option>
-              <option value="Destination">Destination</option>
-              <option value="Destination">Destination</option>
+              <option value="Destination">Destination</option> -->
             </select>
           </div>
           <div class="submit-trip">
-            <input type="submit" value="Submit"/>
+            <input class="submit-btn" type="submit" value="Submit"/>
           </div>
         </form>
       </section>
       <section class="all-trips">
         <h2>My Trips</h2>
+        <div class="trip-buttons">
+          <button class="pending-btn" id="pending-btn">See Pending Trips</button>
+          <button class="upcoming-btn" id="upcoming-btn">See Upcoming Trips</button>
+          <button class="past-btn" id="past-btn">See Past Trips</button>
+          <button class="present-btn" id="present-btn">See Present Trips</button>
+        </div>
       </section>
-      <section class="pending-trip-section">
+            <p class="year-expenses" id="yearly-expenses">Total Expenses</p>
+    </main>
+  </section>
+
+
+      <!-- PENDING TRIPS -->
+      <section class="pending-trip-section hidden" id="pending-area">
+        <header class="logo2" id="logo1">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Pending Trips</h3>
         <section class="pending-container">
-          <div class="pending-trip-1">Pending-Trip-1</div>
+          <!-- <div class="pending-trip-1">Pending-Trip-1</div>
           <div class="pending-trip-2">Pending-Trip-2</div>
           <div class="pending-trip-3">Pending-Trip-3</div>
           <div class="pending-trip-4">Pending-Trip-4</div>
           <div class="pending-trip-5">Pending-Trip-5</div>
-          <div class="pending-trip-6">Pending-Trip-6</div>
+          <div class="pending-trip-6">Pending-Trip-6</div> -->
         </section>
       </section>
-      <section class="present-trip-section">
+
+      <!-- PRESENT TRIPS -->
+      <section class="present-trip-section hidden" id="present-area">
+        <header class="logo2" id="logo2">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Present Trips</h3>
-        <section class="present-container">
-          <div class="present-trip-1">Present-Trip</div>
+        <p class="present-message" id="present-message"></p>
+        <section class="present-container" id="present">
+          <!-- <div class="present-trip-1">Present-Trip</div>
           <div class="present-trip-2">Present-Trip</div>
           <div class="present-trip-3">Present-Trip</div>
           <div class="present-trip-4">Present-Trip</div>
           <div class="present-trip-5">Present-Trip</div>
-          <div class="present-trip-6">Present-Trip</div>
+          <div class="present-trip-6">Present-Trip</div> -->
         </section>
       </section>
-      <section class="upcoming-trip-section">
+
+      <!-- Upcoming TRIPS -->
+      <section class="upcoming-trip-section hidden" id="upcoming-area">
+        <header class="logo2" id="logo3">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Upcoming Trips</h3>
+        <p class="upcoming-message" id="upcoming-message"></p>
         <section class="upcoming-container" id="upcoming">
           <!-- <div class="upcoming-trip-1"></div>
           <div class="upcoming-trip-2"></div>
@@ -105,8 +133,14 @@
           <div class="upcoming-trip-6"></div> -->
         </section>
       </section>
-      <section class="past-trip-section">
+
+      <!-- Past TRIPS -->
+      <section class="past-trip-section hidden" id="past-area">
+        <header class="logo2" id="logo4">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Past Trips</h3>
+        <p class="past-message" id="past-message"></p>
         <section class="past-container" id="past">
           <!-- <div class="past-trip-1"></div>
           <div class="past-trip-2"></div>
@@ -116,9 +150,8 @@
           <div class="past-trip-6"></div> -->
         </section>
       </section>
-    </main>
-  </section>
 
+      <p class="year-expenses" id="yearly-expenses"></p>
 
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>

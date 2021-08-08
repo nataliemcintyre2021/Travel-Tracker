@@ -5,10 +5,10 @@ class Traveler {
     this.travelerType = travelerData.travelerType;
   }
 
-  showTravelerFirstName() {
-    const name = this.name.split(" ");
-    return name[0];
-  }
+  // showTravelerFirstName() {
+  //   const name = this.name.split(" ");
+  //   return name[0];
+  // }
 
   // getTraveler(travelerId) {
   //   const theTraveler = this.data.find(traveler => travelerId === traveler["id"])
