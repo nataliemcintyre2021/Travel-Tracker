@@ -18,6 +18,8 @@ let tripsRepo;
 let allTravelerData = [];
 let allTripData = [];
 let allDestinationData = [];
+let pendingTrips = [];
+let bookedTrip = [];
 
 //querySelectors
 
@@ -26,6 +28,7 @@ const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
 const presentContainer = document.getElementById('present');
 const destinationSelector = document.getElementById('destination-selector');
+
 const pendingButton = document.getElementById('pending-btn');
 const upcomingButton = document.getElementById('upcoming-btn');
 const pastButton = document.getElementById('past-btn');
@@ -34,16 +37,24 @@ const logoButton1 = document.getElementById('logo1');
 const logoButton2 = document.getElementById('logo2');
 const logoButton3 = document.getElementById('logo3');
 const logoButton4 = document.getElementById('logo4');
+const submitButton = document.getElementById('submit-new');
+
 const loginArea = document.getElementById('login-area');
 const tripsArea = document.getElementById('trips-area');
 const presentArea = document.getElementById('present-area');
 const upcomingArea = document.getElementById('upcoming-area');
 const pastArea = document.getElementById('past-area');
 const pendingArea = document.getElementById('pending-area');
+
 const pastMessage = document.getElementById('past-message');
 const upcomingMessage = document.getElementById('upcoming-message');
 const presentMessage = document.getElementById('present-message');
 const greeting = document.getElementById('greeting');
+
+const dateSelect = document.getElementById('date-select');
+const daysSelect = document.getElementById('days-select');
+const travelersSelect = document.getElementById('travelers-select');
+const destinationSelect = document.getElementById('destination-selector');
 
 
 //event listeners
@@ -57,6 +68,7 @@ logoButton1.addEventListener('click', showHomePage);
 logoButton2.addEventListener('click', showHomePage);
 logoButton3.addEventListener('click', showHomePage);
 logoButton4.addEventListener('click', showHomePage);
+submitButton.addEventListener('click', bookTrip);
 
 function fetchData() {
   Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
@@ -86,7 +98,7 @@ function createCurrentTravelerAndTrips() {
 function showSelectDestinationOptions() {
   allDestinationData.forEach(destination => {
     destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
-    <select name="destinations"><option value="Destination">${destination.destination}</option></select`
+    <select name="destinations"><option value="${destination.destination}" id="${destination.id}">${destination.destination}</option></select`
   })
 
 }
@@ -175,6 +187,31 @@ function getUpcomingTrips() {
       upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
     }
 }
+
+  function bookTrip() {
+    event.preventDefault();
+
+    let tripIdValue = 0;
+    let destinationIdValue = 0;
+    console.log(allDestinationData)
+    console.log("DESTINATION", destinationSelect.value)
+
+    allDestinationData.forEach(destination => {
+      if (destination["destination"] === destinationSelect.value) {
+        destinationIdValue += destination.id;
+      }
+    })
+
+    allTripData.forEach(trip => {
+      if (destinationIdValue === trip["destinationID"]) {
+        tripIdValue += trip.id;
+      }
+    })
+
+
+    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": dateSelect.value, "duration": daysSelect.value, "status": "pending"})
+    console.log("BOOKED TRIP>>>>>", bookedTrip)
+  }
 
    function showPending() {
      loginArea.classList.add('hidden');
