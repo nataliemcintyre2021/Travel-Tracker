@@ -4,6 +4,7 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import './images/TravelTracker.png';
+import './images/logo-travel.png';
 
 import Trips from './Trips';
 import Traveler from './Traveler';
@@ -74,7 +75,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(50);
+  currentTraveler = travelersRepo.getDataByTravelerId(3);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
