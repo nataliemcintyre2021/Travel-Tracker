@@ -36,7 +36,7 @@
 
   <section class="trips-page" id="trips-area">
     <header class="logo2">
-      <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+      <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
     </header>
     <article class="greeting" id="greeting"></article>
     <main>
@@ -46,27 +46,27 @@
         <form class="make-trip-form">
           <div class="date">
             <label for="date" class="date-text">Select Trip Start Date: </label>
-            <input class="date-selector" type="date" name="date" value="2021-08-03"/>
+            <input class="date-selector" id="date-select" type="date" name="date" value="2021-08-03"/>
           </div>
           <div class="duration-input">
             <label for="duration" class="duration-text">Number of Days: </label>
-            <input type="number" name="duration" required/>
+            <input id="days-select" type="number" name="duration" required/>
           </div>
           <div class="number-travelers">
             <label for="number-of-travelers" class="travelers-text">Number of Travelers: </label>
-            <input type="number" name="number-of-travelers" required/>
+            <input id="travelers-select" type="number" name="number-of-travelers" required/>
           </div>
           <div class="selector">
             <label for="destinations" class="destinations-text">Select Destination:</label>
             <select id="destination-selector" name="destinations">
-              <option value="Destination">Select Destination</option>
+              <option id ="destination-select"></option>
               <!-- <option value="Destination">Destination</option>
               <option value="Destination">Destination</option>
               <option value="Destination">Destination</option> -->
             </select>
           </div>
           <div class="submit-trip">
-            <input class="submit-btn" type="submit" value="Submit"/>
+            <input class="submit-btn" id="submit-new" type="submit" value="Submit"/>
           </div>
         </form>
       </section>
@@ -87,7 +87,7 @@
       <!-- PENDING TRIPS -->
       <section class="pending-trip-section hidden" id="pending-area">
         <header class="logo2" id="logo1">
-          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+          <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
         </header>
         <h3>Pending Trips</h3>
         <section class="pending-container">
@@ -103,7 +103,7 @@
       <!-- PRESENT TRIPS -->
       <section class="present-trip-section hidden" id="present-area">
         <header class="logo2" id="logo2">
-          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+          <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
         </header>
         <h3>Present Trips</h3>
         <p class="present-message" id="present-message"></p>
@@ -120,7 +120,7 @@
       <!-- Upcoming TRIPS -->
       <section class="upcoming-trip-section hidden" id="upcoming-area">
         <header class="logo2" id="logo3">
-          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+          <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
         </header>
         <h3>Upcoming Trips</h3>
         <p class="upcoming-message" id="upcoming-message"></p>
@@ -137,7 +137,7 @@
       <!-- Past TRIPS -->
       <section class="past-trip-section hidden" id="past-area">
         <header class="logo2" id="logo4">
-          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+          <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
         </header>
         <h3>Past Trips</h3>
         <p class="past-message" id="past-message"></p>
