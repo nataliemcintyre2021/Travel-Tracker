@@ -16,16 +16,16 @@ describe('Trips', () => {
         "status": "approved",
         "suggestedActivities": []
       },
-      // {
-      //   "id": 3,
-      //   "userID": 3,
-      //   "destinationID": 22,
-      //   "travelers": 4,
-      //   "date": "2021/08/04",
-      //   "duration": 17,
-      //   "status": "approved",
-      //   "suggestedActivities": []
-      // },
+      {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 22,
+        "travelers": 4,
+        "date": "2021/08/06",
+        "duration": 17,
+        "status": "approved",
+        "suggestedActivities": []
+      },
       {
         "id": 41,
         "userID": 3,
@@ -123,7 +123,6 @@ describe('Trips', () => {
         }];
 
     const specificTravelerTrips = tripsRepo.getTravelerTripsById(50);
-    // console.log(">>>TRAVELER50", specificTravelerTrips)
     expect(specificTravelerTrips).to.deep.equal(traveler50Trips);
   })
 
@@ -173,6 +172,27 @@ describe('Trips', () => {
     const upcomingTrips = tripsRepo.getTravelerUpcomingTrips(3);
 
     expect(upcomingTrips).to.deep.equal(traveler3UpcomingTrips);
+  })
+
+  it('should return present trips', function () {
+
+    const traveler3PresentTrips = [
+      {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 22,
+        "travelers": 4,
+        "date": "2021/08/06",
+        "duration": 17,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ];
+
+    const presentTrips = tripsRepo.getTravelerPresentTrips(3);
+
+    expect(presentTrips).to.deep.equal(traveler3PresentTrips);
+
   })
 
   it('should return travel trips in the past year', function () {
@@ -241,6 +261,195 @@ describe('Trips', () => {
 
     expect(yearsCost).to.equal(2552);
   })
+
+  it('should get traveler past destinations', function () {
+    const destinationData = [
+      {
+        "id":1,
+        "destination":"Lima, Peru",
+        "estimatedLodgingCostPerDay":70,
+        "estimatedFlightCostPerPerson":400,
+        "image":"https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        "alt":"overview of city buildings with a clear sky"
+      },
+      {
+        "id":16,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      },
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      },
+      {
+        "id":25,
+        "destination":"New York, New York",
+        "estimatedLodgingCostPerDay":175,
+        "estimatedFlightCostPerPerson":200,
+        "image":"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people crossing the street during the day surrounded by tall buildings and advertisements"
+      },
+      {
+        "id":42,
+        "destination":"Santo Domingo, Dominican Republic",
+        "estimatedLodgingCostPerDay":400,
+        "estimatedFlightCostPerPerson":80,
+        "image":"https://images.unsplash.com/photo-1510541383520-4daa77a666cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1782&q=80",
+        "alt":"aerial view of houses and high rise building"
+      }
+    ];
+
+    const traveler3PastDestinationData = [
+      {
+        "id":16,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      },
+      {
+        "id":25,
+        "destination":"New York, New York",
+        "estimatedLodgingCostPerDay":175,
+        "estimatedFlightCostPerPerson":200,
+        "image":"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people crossing the street during the day surrounded by tall buildings and advertisements"
+      }
+    ];
+
+    const travelerPastDestinations = tripsRepo.getTravelerPastDestinations(3, destinationData);
+
+    expect(travelerPastDestinations).to.deep.equal(traveler3PastDestinationData)
+  });
+
+  it('should get traveler upcoming destinations', function () {
+    const destinationData = [
+      {
+        "id":1,
+        "destination":"Lima, Peru",
+        "estimatedLodgingCostPerDay":70,
+        "estimatedFlightCostPerPerson":400,
+        "image":"https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        "alt":"overview of city buildings with a clear sky"
+      },
+      {
+        "id":16,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      },
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      },
+      {
+        "id":25,
+        "destination":"New York, New York",
+        "estimatedLodgingCostPerDay":175,
+        "estimatedFlightCostPerPerson":200,
+        "image":"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people crossing the street during the day surrounded by tall buildings and advertisements"
+      },
+      {
+        "id":42,
+        "destination":"Santo Domingo, Dominican Republic",
+        "estimatedLodgingCostPerDay":400,
+        "estimatedFlightCostPerPerson":80,
+        "image":"https://images.unsplash.com/photo-1510541383520-4daa77a666cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1782&q=80",
+        "alt":"aerial view of houses and high rise building"
+      }
+    ];
+
+    const traveler3UpcomingDestinationData = [
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      }
+    ];
+
+    const travelerUpcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(3, destinationData);
+
+    expect(travelerUpcomingDestinations).to.deep.equal(traveler3UpcomingDestinationData)
+  })
+
+  it('should get traveler present destinations', function () {
+    const destinationData = [
+      {
+        "id":1,
+        "destination":"Lima, Peru",
+        "estimatedLodgingCostPerDay":70,
+        "estimatedFlightCostPerPerson":400,
+        "image":"https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        "alt":"overview of city buildings with a clear sky"
+      },
+      {
+        "id":16,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      },
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      },
+      {
+        "id":25,
+        "destination":"New York, New York",
+        "estimatedLodgingCostPerDay":175,
+        "estimatedFlightCostPerPerson":200,
+        "image":"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people crossing the street during the day surrounded by tall buildings and advertisements"
+      },
+      {
+        "id":42,
+        "destination":"Santo Domingo, Dominican Republic",
+        "estimatedLodgingCostPerDay":400,
+        "estimatedFlightCostPerPerson":80,
+        "image":"https://images.unsplash.com/photo-1510541383520-4daa77a666cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1782&q=80",
+        "alt":"aerial view of houses and high rise building"
+      }
+    ];
+
+    const traveler3PresentDestinationData = [
+      {
+        "id":22,
+        "destination":"Rome, Italy",
+        "estimatedLodgingCostPerDay":90,
+        "estimatedFlightCostPerPerson":650,
+        "image":"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        "alt":"people standing inside a colosseum during the day"
+      }
+    ];
+
+    const travelerPresentDestinations = tripsRepo.getTravelerPresentDestinations(3, destinationData);
+
+    expect(travelerPresentDestinations).to.deep.equal(traveler3PresentDestinationData)
+  })
+
 
   // it('should return traveler trips that are present', function () {
   //
