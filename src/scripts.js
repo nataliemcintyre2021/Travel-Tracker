@@ -25,10 +25,36 @@ const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
 const presentContainer = document.getElementById('present');
 const destinationSelector = document.getElementById('destination-selector');
+const pendingButton = document.getElementById('pending-btn');
+const upcomingButton = document.getElementById('upcoming-btn');
+const pastButton = document.getElementById('past-btn');
+const presentButton = document.getElementById('present-btn');
+const logoButton1 = document.getElementById('logo1');
+const logoButton2 = document.getElementById('logo2');
+const logoButton3 = document.getElementById('logo3');
+const logoButton4 = document.getElementById('logo4');
+const loginArea = document.getElementById('login-area');
+const tripsArea = document.getElementById('trips-area');
+const presentArea = document.getElementById('present-area');
+const upcomingArea = document.getElementById('upcoming-area');
+const pastArea = document.getElementById('past-area');
+const pendingArea = document.getElementById('pending-area');
+const pastMessage = document.getElementById('past-message');
+const upcomingMessage = document.getElementById('upcoming-message');
+const presentMessage = document.getElementById('present-message');
+
 
 //event listeners
 
-window.addEventListener('load', fetchData)
+window.addEventListener('load', fetchData);
+pendingButton.addEventListener('click', showPending);
+upcomingButton.addEventListener('click', showUpcoming);
+pastButton.addEventListener('click', showPast);
+presentButton.addEventListener('click', showPresent);
+logoButton1.addEventListener('click', showHomePage);
+logoButton2.addEventListener('click', showHomePage);
+logoButton3.addEventListener('click', showHomePage);
+logoButton4.addEventListener('click', showHomePage);
 
 function fetchData() {
   Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
@@ -47,7 +73,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(44);
+  currentTraveler = travelersRepo.getDataByTravelerId(4);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
@@ -78,6 +104,7 @@ function getTrips() {
   let presentDestinations = tripsRepo.getTravelerPresentDestinations(currentTraveler.id, allDestinationData);
 
   let loopCounter1 = 1;
+  if (upcomingDestinations.length > 0) {
   upcomingDestinations.forEach(destination => {
     upcomingTrips.forEach(trip => {
       if (destination.id === trip.destinationID) {
@@ -86,8 +113,12 @@ function getTrips() {
     }
     })
   })
+} else {
+    upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
+}
 
     let loopCounter2 = 1;
+    if (pastDestinations.length > 0) {
      pastDestinations.forEach(destination => {
        pastTrips.forEach(trip => {
          if (destination.id === trip.destinationID) {
@@ -106,8 +137,12 @@ function getTrips() {
          }
        })
      })
+   } else {
+     pastMessage.innerText = "You have no past trips to display. Head back to the main page to book a new trip!"
+   }
 
      let loopCounter3 = 1;
+     if (presentDestinations.length > 0) {
       presentDestinations.forEach(destination => {
         presentTrips.forEach(trip => {
           if (destination.id === trip.destinationID) {
@@ -126,8 +161,55 @@ function getTrips() {
           }
         })
       })
+    } else {
+      presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
+    }
 
+   }
 
+   function showPending() {
+     loginArea.classList.add('hidden');
+     tripsArea.classList.add('hidden');
+     pendingArea.classList.remove('hidden')
+     presentArea.classList.add('hidden');
+     upcomingArea.classList.add('hidden');
+     pastArea.classList.add('hidden');
+   }
 
+   function showUpcoming() {
+     loginArea.classList.add('hidden');
+     tripsArea.classList.add('hidden');
+     pendingArea.classList.add('hidden')
+     presentArea.classList.add('hidden');
+     upcomingArea.classList.remove('hidden');
+     pastArea.classList.add('hidden');
+   }
 
+   function showPast() {
+     loginArea.classList.add('hidden');
+     tripsArea.classList.add('hidden');
+     pendingArea.classList.add('hidden')
+     presentArea.classList.add('hidden');
+     upcomingArea.classList.add('hidden');
+     pastArea.classList.remove('hidden');
+   }
+
+   function showPresent() {
+     loginArea.classList.add('hidden');
+     tripsArea.classList.add('hidden');
+     pendingArea.classList.add('hidden')
+     presentArea.classList.remove('hidden');
+     upcomingArea.classList.add('hidden');
+     pastArea.classList.add('hidden');
+   }
+
+   function showHomePage() {
+     console.log("CLICKED")
+     loginArea.classList.add('hidden');
+     tripsArea.classList.add('hidden');
+     pendingArea.classList.add('hidden')
+     presentArea.classList.add('hidden');
+     upcomingArea.classList.add('hidden');
+     pastArea.classList.add('hidden');
+     tripsArea.classList.remove('hidden');
    }

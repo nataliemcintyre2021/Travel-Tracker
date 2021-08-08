@@ -11,7 +11,7 @@
 </head>
 <body>
   <!-- LOG-IN PAGE -->
-  <section class="login-page hidden">
+  <section class="login-page hidden" id="login-area">
     <header class="logo">
       <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
     </header>
@@ -34,12 +34,12 @@
 
   <!-- USER PAGE -->
 
-  <section class="trips-page">
+  <section class="trips-page" id="trips-area">
     <header class="logo2">
       <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
     </header>
     <main>
-      <p id="yearly-expenses">Total Expenses</p>
+      <!-- <p id="yearly-expenses">Total Expenses</p> -->
       <section class="request-form">
         <h3 class="book-trip">Make a Trip Request: </h3>
         <form class="make-trip-form">
@@ -71,8 +71,23 @@
       </section>
       <section class="all-trips">
         <h2>My Trips</h2>
+        <div class="trip-buttons">
+          <button class="pending-btn" id="pending-btn">See Pending Trips</button>
+          <button class="upcoming-btn" id="upcoming-btn">See Upcoming Trips</button>
+          <button class="past-btn" id="past-btn">See Past Trips</button>
+          <button class="present-btn" id="present-btn">See Present Trips</button>
+        </div>
       </section>
-      <section class="pending-trip-section">
+            <p class="year-expenses" id="yearly-expenses">Total Expenses</p>
+    </main>
+  </section>
+
+
+      <!-- PENDING TRIPS -->
+      <section class="pending-trip-section hidden" id="pending-area">
+        <header class="logo2" id="logo1">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Pending Trips</h3>
         <section class="pending-container">
           <!-- <div class="pending-trip-1">Pending-Trip-1</div>
@@ -83,8 +98,14 @@
           <div class="pending-trip-6">Pending-Trip-6</div> -->
         </section>
       </section>
-      <section class="present-trip-section">
+
+      <!-- PRESENT TRIPS -->
+      <section class="present-trip-section hidden" id="present-area">
+        <header class="logo2" id="logo2">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Present Trips</h3>
+        <p class="present-message" id="present-message"></p>
         <section class="present-container" id="present">
           <!-- <div class="present-trip-1">Present-Trip</div>
           <div class="present-trip-2">Present-Trip</div>
@@ -94,8 +115,14 @@
           <div class="present-trip-6">Present-Trip</div> -->
         </section>
       </section>
-      <section class="upcoming-trip-section">
+
+      <!-- Upcoming TRIPS -->
+      <section class="upcoming-trip-section hidden" id="upcoming-area">
+        <header class="logo2" id="logo3">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Upcoming Trips</h3>
+        <p class="upcoming-message" id="upcoming-message"></p>
         <section class="upcoming-container" id="upcoming">
           <!-- <div class="upcoming-trip-1"></div>
           <div class="upcoming-trip-2"></div>
@@ -105,8 +132,14 @@
           <div class="upcoming-trip-6"></div> -->
         </section>
       </section>
-      <section class="past-trip-section">
+
+      <!-- Past TRIPS -->
+      <section class="past-trip-section hidden" id="past-area">
+        <header class="logo2" id="logo4">
+          <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
+        </header>
         <h3>Past Trips</h3>
+        <p class="past-message" id="past-message"></p>
         <section class="past-container" id="past">
           <!-- <div class="past-trip-1"></div>
           <div class="past-trip-2"></div>
@@ -116,9 +149,8 @@
           <div class="past-trip-6"></div> -->
         </section>
       </section>
-    </main>
-  </section>
 
+      <!-- <p class="year-expenses" id="yearly-expenses">Total Expenses</p> -->
 
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
