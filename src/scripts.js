@@ -40,26 +40,30 @@ function parseValues(data) {
   // console.log(allTravelerData)
   // console.log(allTripData)
   // console.log(allDestinationData)
-  createTrips();
+  createCurrentTravelerAndTrips()
 }
 
-function createTrips() {
+function createCurrentTravelerAndTrips() {
+  let travelersRepo = new TravelersRepo(allTravelerData);
+  currentTraveler = travelersRepo.getDataByTravelerId(3);
+  console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
 }
 
 function getExpenses() {
-  let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(3, allDestinationData)
+  let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(currentTraveler.id, allDestinationData)
   yearExpenses.innerText = `Amount spent on trips this year: $${userExpenses.toFixed(2)}`
 
   getTrips();
 }
 
 function getTrips() {
-  let pastTrips = tripsRepo.getTravelerPastTrips(3)
-  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(3)
-  let pastDestinations = tripsRepo.getTravelerPastDestinations(3, allDestinationData)
-  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(3, allDestinationData)
+  let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id)
+  let upcomingTrips = tripsRepo.getTravelerUpcomingTrips(currentTraveler.id)
+  let pastDestinations = tripsRepo.getTravelerPastDestinations(currentTraveler.id, allDestinationData)
+  let upcomingDestinations = tripsRepo.getTravelerUpcomingDestinations(currentTraveler.id, allDestinationData)
+  console.log("")
 
   upcomingTrips.forEach(trip => {
     let loopCounter = 1;
@@ -69,12 +73,12 @@ function getTrips() {
     })
   })
 
-  pastTrips.forEach(trip => {
-    pastContainer.innerHTML += '';
+  // pastTrips.forEach(trip => {
+    // pastContainer.innerHTML += '';
      let loopCounter = 1;
-
      // pastContainer.innerHTML +=
      pastDestinations.forEach(destination => {
+       // if (trip["destinationID"] === destination["id"]) {
        // let loopCounter = 1;
        // if (trip["destinationID"] === destination["id"]) {
        pastContainer.innerHTML +=
@@ -84,10 +88,14 @@ function getTrips() {
 
         </div>`
        loopCounter++;
-
-     })
+     // }
+    // })
 
    })
+
+   // pastTrips.forEach(trip => {
+   //
+   // })
  }
    // <section class="trip-info">
    //   <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
