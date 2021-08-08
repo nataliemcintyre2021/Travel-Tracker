@@ -38,6 +38,7 @@
     <header class="logo2">
       <img class="logo-img" id="travel-logo" src="./images/TravelTracker.png" alt="travel tracker logo">
     </header>
+    <article class="greeting" id="greeting"></article>
     <main>
       <!-- <p id="yearly-expenses">Total Expenses</p> -->
       <section class="request-form">
@@ -49,23 +50,23 @@
           </div>
           <div class="duration-input">
             <label for="duration">Number of Days: </label>
-            <input type="number" name="duration"/>
+            <input type="number" name="duration" required/>
           </div>
           <div class="number-travelers">
             <label for="number-of-travelers">Number of Travelers: </label>
-            <input type="number" name="number-of-travelers"/>
+            <input type="number" name="number-of-travelers" required/>
           </div>
           <div class="selector">
             <label for="destinations">Select Destination:</label>
             <select id="destination-selector" name="destinations">
-              <!-- <option value="Destination"></option>
-              <option value="Destination">Destination</option>
+              <option value="Destination">Select Destination</option>
+              <!-- <option value="Destination">Destination</option>
               <option value="Destination">Destination</option>
               <option value="Destination">Destination</option> -->
             </select>
           </div>
           <div class="submit-trip">
-            <input type="submit" value="Submit"/>
+            <input class="submit-btn" type="submit" value="Submit"/>
           </div>
         </form>
       </section>
@@ -150,7 +151,7 @@
         </section>
       </section>
 
-      <!-- <p class="year-expenses" id="yearly-expenses">Total Expenses</p> -->
+      <p class="year-expenses" id="yearly-expenses"></p>
 
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>

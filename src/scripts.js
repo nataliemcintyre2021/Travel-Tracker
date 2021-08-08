@@ -42,6 +42,7 @@ const pendingArea = document.getElementById('pending-area');
 const pastMessage = document.getElementById('past-message');
 const upcomingMessage = document.getElementById('upcoming-message');
 const presentMessage = document.getElementById('present-message');
+const greeting = document.getElementById('greeting');
 
 
 //event listeners
@@ -73,11 +74,12 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(4);
+  currentTraveler = travelersRepo.getDataByTravelerId(16);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
-  showSelectDestinationOptions()
+  showSelectDestinationOptions();
+  showGreeting();
 }
 
 function showSelectDestinationOptions() {
@@ -212,4 +214,8 @@ function getTrips() {
      upcomingArea.classList.add('hidden');
      pastArea.classList.add('hidden');
      tripsArea.classList.remove('hidden');
+   }
+
+   function showGreeting() {
+     greeting.innerText = `Welcome, ${currentTraveler.name}!`
    }

@@ -65,12 +65,21 @@ body {
   text-align: center;
 }
 
+.greeting {
+  text-align: center;
+  font-size: 1.5em;
+}
+
 .logo2 {
   // border: 2px solid black;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.request-form {
+  margin: 0;
 }
 
 .book-trip {
@@ -93,8 +102,10 @@ body {
 .selector {
   display: flex;
   flex-direction: column;
-  max-width: 12%;
-  margin: 2px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 15em;
+  margin: .25em;
 }
 .submit-trip {
   margin: 5px;
@@ -103,9 +114,10 @@ body {
 .all-trips {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   // border: 2px solid black;
+  // margin: 1.5em;
 }
 
 .trip-buttons {
@@ -115,7 +127,8 @@ body {
 .pending-btn,
 .upcoming-btn,
 .past-btn,
-.present-btn {
+.present-btn,
+.submit-btn {
   // border: 5px solid purple;
 //  border: 0.1em solid #FFFFFF;
 background-color: #225560;
@@ -137,7 +150,8 @@ transition: all 0.2s;
 .pending-btn:hover,
 .upcoming-btn:hover,
 .past-btn:hover,
-.present-btn:hover {
+.present-btn:hover,
+.submit-btn:hover {
   // border: 5px solid purple;
 //  border: 0.1em solid #FFFFFF;
 background-color: #EE701E;
@@ -149,6 +163,7 @@ background-color: #EE701E;
 
 .year-expenses {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .pending-trip-section {
