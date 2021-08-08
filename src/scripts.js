@@ -24,6 +24,7 @@ const yearExpenses = document.getElementById('yearly-expenses');
 const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
 const presentContainer = document.getElementById('present');
+const destinationSelector = document.getElementById('destination-selector');
 
 //event listeners
 
@@ -50,6 +51,15 @@ function createCurrentTravelerAndTrips() {
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
+  showSelectDestinationOptions()
+}
+
+function showSelectDestinationOptions() {
+  allDestinationData.forEach(destination => {
+    destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
+    <select name="destinations"><option value="Destination">${destination.destination}</option></select`
+  })
+
 }
 
 function getExpenses() {
