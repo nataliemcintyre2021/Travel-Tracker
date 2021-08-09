@@ -55,6 +55,9 @@ const dateSelect = document.getElementById('date-select');
 const daysSelect = document.getElementById('days-select');
 const travelersSelect = document.getElementById('travelers-select');
 const destinationSelect = document.getElementById('destination-selector');
+const estimatedCostSection = document.getElementById('est-cost');
+
+const tripForm = document.getElementById('trip-form');
 
 
 //event listeners
@@ -68,7 +71,14 @@ logoButton1.addEventListener('click', showHomePage);
 logoButton2.addEventListener('click', showHomePage);
 logoButton3.addEventListener('click', showHomePage);
 logoButton4.addEventListener('click', showHomePage);
-submitButton.addEventListener('click', bookTrip);
+// submitButton.addEventListener('click', bookTrip);
+tripForm.addEventListener('submit', bookTrip);
+// dateSelect.addEventListener('change', buttonEnable);
+// daysSelect.addEventListener('change', buttonEnable);
+// travelersSelect.addEventListener('change', buttonEnable);
+// destinationSelect.addEventListener('change', buttonEnable);
+
+// submitButton.disabled = true;
 
 function fetchData() {
   Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
@@ -188,10 +198,13 @@ function getUpcomingTrips() {
     }
 }
 
-  function bookTrip() {
+  function bookTrip(event) {
     event.preventDefault();
 
-    let tripIdValue = 0;
+    let tripIdValue = allTripData.length + 1;
+    let date = dateSelect.value.split("-").join("/");
+    let estimatedCost = '';
+    console.log("TripIdValue", tripIdValue)
     let destinationIdValue = 0;
     console.log(allDestinationData)
     console.log("DESTINATION", destinationSelect.value)
@@ -199,19 +212,39 @@ function getUpcomingTrips() {
     allDestinationData.forEach(destination => {
       if (destination["destination"] === destinationSelect.value) {
         destinationIdValue += destination.id;
+        let travelAgentFee = estimatedCost * .1
+        let travelCosts = ((travelersSelect.value * destination.estimatedFlightCostPerPerson) + (daysSelect.value * destination.estimatedLodgingCostPerDay));
+
+        estimatedCost = (travelCosts + travelAgentFee).toFixed(2);
+
+        console.log("theDestination=>", destination)
+        console.log("COST", estimatedCost);
       }
     })
 
-    allTripData.forEach(trip => {
-      if (destinationIdValue === trip["destinationID"]) {
-        tripIdValue += trip.id;
-      }
-    })
+    estimatedCostSection.innerText = `Trips estimated cost is $${estimatedCost}`
 
+    // allTripData.forEach(trip => {
+    //   if (destinationIdValue === trip["destinationID"]) {
+    //     tripIdValue += trip.id;
+    //     console.log("theTrip=>", trip)
+    //   }
+    // })
 
-    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": dateSelect.value, "duration": daysSelect.value, "status": "pending"})
+    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending"})
     console.log("BOOKED TRIP>>>>>", bookedTrip)
+
+    tripForm.reset();
   }
+
+  // function buttonEnable() {
+  //   if ((dateSelect.value.length === 0) || (daysSelect.value.length  === 0) || (travelersSelect.value.length === 0) || (destinationSelect.value.length === 0)) {
+  //     submitButton.disabled = true;
+  //   } else {
+  //     submitButton.disabled = false;
+  //   }
+  //   // submitButton.disabled = true;
+  // }
 
    function showPending() {
      loginArea.classList.add('hidden');
