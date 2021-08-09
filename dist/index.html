@@ -43,22 +43,23 @@
       <!-- <p id="yearly-expenses">Total Expenses</p> -->
       <section class="request-form">
         <h3 class="book-trip">Make a Trip Request: </h3>
-        <form class="make-trip-form">
+        <form class="make-trip-form" id="trip-form" required>
           <div class="date">
             <label for="date" class="date-text">Select Trip Start Date: </label>
-            <input class="date-selector" id="date-select" type="date" name="date" value="2021-08-03"/>
+            <input class="date-selector" id="date-select" type="date" name="date" value="2021-08-08"
+            min="2021-08-08" max="2023-08-08" required/>
           </div>
           <div class="duration-input">
             <label for="duration" class="duration-text">Number of Days: </label>
-            <input id="days-select" type="number" name="duration" required/>
+            <input id="days-select" type="number" name="duration" min="1" required/>
           </div>
           <div class="number-travelers">
             <label for="number-of-travelers" class="travelers-text">Number of Travelers: </label>
-            <input id="travelers-select" type="number" name="number-of-travelers" required/>
+            <input id="travelers-select" type="number" name="number-of-travelers" min="1" required/>
           </div>
           <div class="selector">
             <label for="destinations" class="destinations-text">Select Destination:</label>
-            <select id="destination-selector" name="destinations">
+            <select id="destination-selector" name="destinations" required>
               <option id ="destination-select"></option>
               <!-- <option value="Destination">Destination</option>
               <option value="Destination">Destination</option>

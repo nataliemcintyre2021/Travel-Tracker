@@ -57,6 +57,8 @@ const travelersSelect = document.getElementById('travelers-select');
 const destinationSelect = document.getElementById('destination-selector');
 const estimatedCostSection = document.getElementById('est-cost');
 
+const tripForm = document.getElementById('trip-form');
+
 
 //event listeners
 
@@ -69,7 +71,14 @@ logoButton1.addEventListener('click', showHomePage);
 logoButton2.addEventListener('click', showHomePage);
 logoButton3.addEventListener('click', showHomePage);
 logoButton4.addEventListener('click', showHomePage);
-submitButton.addEventListener('click', bookTrip);
+// submitButton.addEventListener('click', bookTrip);
+tripForm.addEventListener('submit', bookTrip);
+// dateSelect.addEventListener('change', buttonEnable);
+// daysSelect.addEventListener('change', buttonEnable);
+// travelersSelect.addEventListener('change', buttonEnable);
+// destinationSelect.addEventListener('change', buttonEnable);
+
+// submitButton.disabled = true;
 
 function fetchData() {
   Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
@@ -189,7 +198,7 @@ function getUpcomingTrips() {
     }
 }
 
-  function bookTrip() {
+  function bookTrip(event) {
     event.preventDefault();
 
     let tripIdValue = allTripData.length + 1;
@@ -224,7 +233,18 @@ function getUpcomingTrips() {
 
     bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending"})
     console.log("BOOKED TRIP>>>>>", bookedTrip)
+
+    tripForm.reset();
   }
+
+  // function buttonEnable() {
+  //   if ((dateSelect.value.length === 0) || (daysSelect.value.length  === 0) || (travelersSelect.value.length === 0) || (destinationSelect.value.length === 0)) {
+  //     submitButton.disabled = true;
+  //   } else {
+  //     submitButton.disabled = false;
+  //   }
+  //   // submitButton.disabled = true;
+  // }
 
    function showPending() {
      loginArea.classList.add('hidden');
