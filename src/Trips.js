@@ -87,7 +87,7 @@ class Trips {
   }
 
   getTravelerPresentDestinations(userId, destinationData) {
-    let thePresentTrips = this.getTravelerUpcomingTrips(userId);
+    let thePresentTrips = this.getTravelerPresentTrips(userId);
 
     const presentDestinations = destinationData.reduce((arr, destination) => {
       thePresentTrips.forEach(trip => {

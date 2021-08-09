@@ -101,7 +101,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(44);
+  currentTraveler = travelersRepo.getDataByTravelerId(18);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
