@@ -55,6 +55,7 @@ const dateSelect = document.getElementById('date-select');
 const daysSelect = document.getElementById('days-select');
 const travelersSelect = document.getElementById('travelers-select');
 const destinationSelect = document.getElementById('destination-selector');
+const estimatedCostSection = document.getElementById('est-cost');
 
 
 //event listeners
@@ -191,7 +192,10 @@ function getUpcomingTrips() {
   function bookTrip() {
     event.preventDefault();
 
-    let tripIdValue = 0;
+    let tripIdValue = allTripData.length + 1;
+    let date = dateSelect.value.split("-").join("/");
+    let estimatedCost = '';
+    console.log("TripIdValue", tripIdValue)
     let destinationIdValue = 0;
     console.log(allDestinationData)
     console.log("DESTINATION", destinationSelect.value)
@@ -199,17 +203,26 @@ function getUpcomingTrips() {
     allDestinationData.forEach(destination => {
       if (destination["destination"] === destinationSelect.value) {
         destinationIdValue += destination.id;
+        let travelAgentFee = estimatedCost * .1
+        let travelCosts = ((travelersSelect.value * destination.estimatedFlightCostPerPerson) + (daysSelect.value * destination.estimatedLodgingCostPerDay));
+
+        estimatedCost = (travelCosts + travelAgentFee).toFixed(2);
+
+        console.log("theDestination=>", destination)
+        console.log("COST", estimatedCost);
       }
     })
 
-    allTripData.forEach(trip => {
-      if (destinationIdValue === trip["destinationID"]) {
-        tripIdValue += trip.id;
-      }
-    })
+    estimatedCostSection.innerText = `Trips estimated cost is $${estimatedCost}`
 
+    // allTripData.forEach(trip => {
+    //   if (destinationIdValue === trip["destinationID"]) {
+    //     tripIdValue += trip.id;
+    //     console.log("theTrip=>", trip)
+    //   }
+    // })
 
-    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": dateSelect.value, "duration": daysSelect.value, "status": "pending"})
+    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending"})
     console.log("BOOKED TRIP>>>>>", bookedTrip)
   }
 
