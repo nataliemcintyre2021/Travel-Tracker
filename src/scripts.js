@@ -147,12 +147,14 @@ function getPastTrips() {
               </section>
           </div>`
          loopCounter++;
+       } else {
+         presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
        }
      })
    })
- } else {
-   pastMessage.innerText = "You have no past trips to display. Head back to the main page to book a new trip!"
- }
+ } //else {
+   //pastMessage.innerText = "You have no past trips to display. Head back to the main page to book a new trip!"
+ //}
 }
 
 function getPresentTrips() {
@@ -176,11 +178,11 @@ function getPresentTrips() {
 
           </div>`
          loopCounter++;
+       } else {
+         presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
        }
      })
    })
- } else {
-   presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
  }
 }
 
@@ -195,12 +197,14 @@ function getUpcomingTrips() {
     if ((destination.id === trip.destinationID) && (trip.status !== "pending")) {
     upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter}"><img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
     loopCounter++;
-    }
-  })
-  })
     } else {
-      upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
+      presentMessage.innerText = "You have no present trips to display. Head back to the main page to book a new trip!"
     }
+  })
+  })
+} //else {
+      //upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
+    //}
 }
 
 function getPendingTrips() {
