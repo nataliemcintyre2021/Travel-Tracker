@@ -45,20 +45,20 @@
         <h3 class="book-trip">Make a Trip Request: </h3>
         <form class="make-trip-form" id="trip-form" required>
           <div class="date">
-            <label for="date" class="date-text">Select Trip Start Date: </label>
+            <label for="date-select" class="date-text">Select Trip Start Date: </label>
             <input class="date-selector" id="date-select" type="date" name="date" value="2021-08-08"
             min="2021-08-08" max="2023-08-08" required/>
           </div>
           <div class="duration-input">
-            <label for="duration" class="duration-text">Number of Days: </label>
+            <label for="days-select" class="duration-text">Number of Days: </label>
             <input id="days-select" type="number" name="duration" min="1" required/>
           </div>
           <div class="number-travelers">
-            <label for="number-of-travelers" class="travelers-text">Number of Travelers: </label>
+            <label for="travelers-select" class="travelers-text">Number of Travelers: </label>
             <input id="travelers-select" type="number" name="number-of-travelers" min="1" required/>
           </div>
           <div class="selector">
-            <label for="destinations" class="destinations-text">Select Destination:</label>
+            <label for="destination-selector" class="destinations-text">Select Destination:</label>
             <select id="destination-selector" name="destinations" required>
               <option id ="destination-select"></option>
               <!-- <option value="Destination">Destination</option>
