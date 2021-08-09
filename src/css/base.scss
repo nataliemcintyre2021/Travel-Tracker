@@ -43,6 +43,7 @@ body {
   // color: #edf6f9;
   // background-image: linear-gradient(#f58320,#dd3a12);
   // color: #ebedef;
+  // border-bottom: 10px solid #BCE8A6;
 }
 
 // body {
@@ -117,6 +118,7 @@ body {
   // background-color: white;
   color: black;
   background-color: white;
+  // background-color: #BCE8A6;
   border: .3em solid black;
 }
 
@@ -163,7 +165,8 @@ body {
 .upcoming-btn,
 .past-btn,
 .present-btn,
-.submit-btn {
+.submit-btn,
+.post-btn {
   // border: 5px solid purple;
 //  border: 0.1em solid #FFFFFF;
 // background-color: #225560;
@@ -191,7 +194,8 @@ background-color: white;
 .upcoming-btn:hover,
 .past-btn:hover,
 .present-btn:hover,
-.submit-btn:hover {
+.submit-btn:hover,
+.post-btn:hover {
   // border: 5px solid purple;
 //  border: 0.1em solid #FFFFFF;
 // background-color: #EE701E;

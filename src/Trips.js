@@ -87,7 +87,7 @@ class Trips {
   }
 
   getTravelerPresentDestinations(userId, destinationData) {
-    let thePresentTrips = this.getTravelerUpcomingTrips(userId);
+    let thePresentTrips = this.getTravelerPresentTrips(userId);
 
     const presentDestinations = destinationData.reduce((arr, destination) => {
       thePresentTrips.forEach(trip => {
@@ -101,9 +101,33 @@ class Trips {
     return presentDestinations;
   }
 
-  // getUserPendingTrips() {
-  //
-  // }
+  getTravelerPendingTrips(userId) {
+    const trips = this.getTravelerTripsById(userId);
+    console.log("USER ALL TRIPS>>>", trips)
+    let pendingTrips = [];
+    trips.forEach(trip => {
+      if (trip.status === "pending") {
+        pendingTrips.push(trip)
+      }
+    })
+    console.log("THE PENDING TRIPS>>>", pendingTrips)
+    return pendingTrips;
+  }
+
+  getTravelerPendingDestinations(userId, destinationData) {
+    let theTrips = this.getTravelerPendingTrips(userId);
+
+    const pendingDestinations = destinationData.reduce((arr, destination) => {
+      theTrips.forEach(trip => {
+        if (destination["id"] === trip["destinationID"]) {
+          arr.push(destination)
+        }
+      })
+      return arr;
+    }, [])
+    console.log("THE PENDING DESTINATIONS>>>>", pendingDestinations)
+    return pendingDestinations;
+  }
 }
 
 

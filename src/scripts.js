@@ -10,7 +10,7 @@ import Trips from './Trips';
 import Traveler from './Traveler';
 import TravelersRepo from './TravelersRepo';
 
-import {getAllTravelersData, getAllTripsData, getAllDestinationsData} from './apiCalls';
+import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage} from './apiCalls';
 
 //global variables
 let currentTraveler;
@@ -27,6 +27,7 @@ const yearExpenses = document.getElementById('yearly-expenses');
 const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
 const presentContainer = document.getElementById('present');
+const pendingContainer = document.getElementById('pending');
 const destinationSelector = document.getElementById('destination-selector');
 
 const pendingButton = document.getElementById('pending-btn');
@@ -38,6 +39,7 @@ const logoButton2 = document.getElementById('logo2');
 const logoButton3 = document.getElementById('logo3');
 const logoButton4 = document.getElementById('logo4');
 const submitButton = document.getElementById('submit-new');
+const submitTripButton = document.getElementById('post-new');
 
 const loginArea = document.getElementById('login-area');
 const tripsArea = document.getElementById('trips-area');
@@ -49,6 +51,7 @@ const pendingArea = document.getElementById('pending-area');
 const pastMessage = document.getElementById('past-message');
 const upcomingMessage = document.getElementById('upcoming-message');
 const presentMessage = document.getElementById('present-message');
+const pendingMessage = document.getElementById('pending-message');
 const greeting = document.getElementById('greeting');
 
 const dateSelect = document.getElementById('date-select');
@@ -73,12 +76,13 @@ logoButton3.addEventListener('click', showHomePage);
 logoButton4.addEventListener('click', showHomePage);
 // submitButton.addEventListener('click', bookTrip);
 tripForm.addEventListener('submit', bookTrip);
+submitTripButton.addEventListener('click', postTrip);
 // dateSelect.addEventListener('change', buttonEnable);
 // daysSelect.addEventListener('change', buttonEnable);
 // travelersSelect.addEventListener('change', buttonEnable);
 // destinationSelect.addEventListener('change', buttonEnable);
 
-// submitButton.disabled = true;
+submitTripButton.disabled = true;
 
 function fetchData() {
   Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
@@ -97,7 +101,7 @@ function parseValues(data) {
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
-  currentTraveler = travelersRepo.getDataByTravelerId(3);
+  currentTraveler = travelersRepo.getDataByTravelerId(18);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses();
@@ -120,6 +124,7 @@ function getExpenses() {
   getPastTrips();
   getPresentTrips();
   getUpcomingTrips();
+  getPendingTrips();
 }
 
 function getPastTrips() {
@@ -130,7 +135,7 @@ function getPastTrips() {
   if (pastDestinations.length > 0) {
    pastDestinations.forEach(destination => {
      pastTrips.forEach(trip => {
-       if (destination.id === trip.destinationID) {
+       if ((destination.id === trip.destinationID) && (trip.status !== "pending")) {
          pastContainer.innerHTML +=
          `<div class="past-trip-${loopCounter}">
              <img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
@@ -158,10 +163,10 @@ function getPresentTrips() {
   if (presentDestinations.length > 0) {
    presentDestinations.forEach(destination => {
      presentTrips.forEach(trip => {
-       if (destination.id === trip.destinationID) {
+       if ((destination.id === trip.destinationID) && (trip.status !== "pending")) {
          presentContainer.innerHTML +=
-         `<div class="past-trip-${loopCounter}">
-             <img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
+         `<div class="present-trip-${loopCounter}">
+             <img class="present-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}">
              <p class="destination">${destination.destination}</p>
              <section class="trip-info">
                 <p class="trip-start-date">Trip Start Date: ${trip.date}</p>
@@ -187,7 +192,7 @@ function getUpcomingTrips() {
   if (upcomingDestinations.length > 0) {
   upcomingDestinations.forEach(destination => {
     upcomingTrips.forEach(trip => {
-    if (destination.id === trip.destinationID) {
+    if ((destination.id === trip.destinationID) && (trip.status !== "pending")) {
     upcomingContainer.innerHTML += `<div class="upcoming-trip-${loopCounter}"><img class="upcoming-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
     loopCounter++;
     }
@@ -195,6 +200,25 @@ function getUpcomingTrips() {
   })
     } else {
       upcomingMessage.innerText = "You have no upcoming trips to display. Head back to the main page to book a new trip!"
+    }
+}
+
+function getPendingTrips() {
+  let pendingTrips = tripsRepo.getTravelerPendingTrips(currentTraveler.id)
+  let pendingDestinations = tripsRepo.getTravelerPendingDestinations(currentTraveler.id, allDestinationData);
+
+  let loopCounter = 1;
+  if (pendingDestinations.length > 0) {
+  pendingDestinations.forEach(destination => {
+    pendingTrips.forEach(trip => {
+    if (destination.id === trip.destinationID) {
+    pendingContainer.innerHTML += `<div class="pending-trip-${loopCounter}"><img class="pending-img-${loopCounter}" id="img" src=${destination.image} alt="${destination.alt}"><p class="destination">${destination.destination}<p><section class="trip-info"><p class="trip-start-date">Trip Start Date: ${trip.date}</p><p class="trip-duration">Trip Duration: ${trip.duration} days</p><p class="number-of-travelers">Number of Travelers: ${trip.travelers}</p></section></div>`
+    loopCounter++;
+    }
+    })
+  })
+    } else {
+      pendingMessage.innerText = "You have no pending trips to display. Head back to the main page to book a new trip!"
     }
 }
 
@@ -231,11 +255,50 @@ function getUpcomingTrips() {
     //   }
     // })
 
-    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending"})
-    console.log("BOOKED TRIP>>>>>", bookedTrip)
+    // bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending"})
+    // console.log("BOOKED TRIP>>>>>", bookedTrip)
 
-    tripForm.reset();
+    // tripForm.reset();
+    submitTripButton.disabled = false;
   }
+
+  function postTrip(event) {
+    event.preventDefault();
+
+    let tripIdValue = allTripData.length + 1;
+    let date = dateSelect.value.split("-").join("/");
+    let estimatedCost = '';
+    console.log("TripIdValue", tripIdValue)
+    let destinationIdValue = 0;
+    console.log(allDestinationData)
+    console.log("DESTINATION", destinationSelect.value)
+
+    allDestinationData.forEach(destination => {
+      if (destination["destination"] === destinationSelect.value) {
+        destinationIdValue += destination.id;
+      }
+    })
+
+    bookedTrip.push({ "id": tripIdValue, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending", "suggestedActivities": []})
+    console.log("BOOKED TRIP>>>>>", bookedTrip)
+    console.log("DATA TO POST>>>>", bookedTrip[0]);
+    postTripData(bookedTrip[0]);
+    window.location.reload();
+
+    // tripForm.reset();
+    // submitTripButton.disabled = true;
+  }
+
+// function checkForErrors(response) {
+//   console.log(response);
+//   if (response.status === 404) {
+//     throw new Error(`${response.status} - something went wrong. ${response.statusText}`);
+//   }
+//   return response.json()
+// }
+
+
+
 
   // function buttonEnable() {
   //   if ((dateSelect.value.length === 0) || (daysSelect.value.length  === 0) || (travelersSelect.value.length === 0) || (destinationSelect.value.length === 0)) {

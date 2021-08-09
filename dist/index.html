@@ -68,12 +68,16 @@
           </div>
           <p class="cost" id="est-cost"></p>
           <div class="submit-trip">
-            <input class="submit-btn" id="submit-new" type="submit" value="Submit"/>
+            <input class="submit-btn" id="submit-new" type="submit" value="Estimate Trip Cost"/>
+          </div>
+          <div class="post-trip">
+            <input class="post-btn" id="post-new" type="submit" value="Submit Trip Request"/>
           </div>
         </form>
       </section>
       <section class="all-trips">
         <h2>My Trips</h2>
+        <p id="js-error"></p>
         <div class="trip-buttons">
           <button class="pending-btn" id="pending-btn">See Pending Trips</button>
           <button class="upcoming-btn" id="upcoming-btn">See Upcoming Trips</button>
@@ -92,7 +96,8 @@
           <img class="logo-img" id="travel-logo" src="./images/logo-travel.png" alt="travel tracker logo">
         </header>
         <h3>Pending Trips</h3>
-        <section class="pending-container">
+        <p class="pending-message" id="pending-message"></p>
+        <section class="pending-container" id="pending">
           <!-- <div class="pending-trip-1">Pending-Trip-1</div>
           <div class="pending-trip-2">Pending-Trip-2</div>
           <div class="pending-trip-3">Pending-Trip-3</div>
