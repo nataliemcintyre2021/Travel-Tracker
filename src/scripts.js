@@ -240,7 +240,7 @@ function getPendingTrips() {
   let pendingDestinations = tripsRepo.getTravelerPendingDestinations(currentTraveler.id, allDestinationData);
 
   let loopCounter = 1;
-  // pendingContainer.innerHTML = '';
+  pendingContainer.innerHTML = '';
   if (pendingDestinations.length > 0) {
     pendingDestinations.forEach(destination => {
     pendingTrips.forEach(trip => {
