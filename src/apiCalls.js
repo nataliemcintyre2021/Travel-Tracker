@@ -25,6 +25,13 @@ export const getAllDestinationsData = () => {
   .catch(err => displayErrorMessage(err), console.log("Destinations data error"))
 }
 
+export const getTravelerAtLogin = (userNumber) => {
+  return fetch(`http://localhost:3001/api/v1/travelers/${userNumber}`)
+    .then(response => checkForErrors(response))
+    .then(data => data)
+    .catch(err => displayErrorMessage(err), console.log("Get traveler at login error"))
+}
+
 export const postTripData = (object) => {
   return fetch ('http://localhost:3001/api/v1/trips', {
     method: 'POST',
@@ -34,12 +41,13 @@ export const postTripData = (object) => {
     }
   })
   .then(response => checkForErrors(response))
-  .then(json => console.log(json))
+  .then(json => json)
+  // .then(getAllTripsData())
   .catch(err => displayErrorMessage(err), console.log("Post trip error"))
 }
 
 export const checkForErrors = (response) => {
-  console.log(response);
+  // console.log(response);
   if (!response.ok) {
     throw new Error(`${response.status} - something went wrong. ${response.statusText}`);
     // displayErrorMessage()
@@ -48,7 +56,6 @@ export const checkForErrors = (response) => {
 }
 
 export const displayErrorMessage = (err) => {
-  console.log("HERE IN DISPLAY ERROR MESSAGE FUNCTION")
   const errorField = document.getElementById('js-error');
   const message =
     err.message === "Failed to fetch" ? "Something went wrong, please check internet" : err.message;
