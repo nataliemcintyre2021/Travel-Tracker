@@ -10,9 +10,9 @@ import Trips from './Trips';
 import Traveler from './Traveler';
 import TravelersRepo from './TravelersRepo';
 
-import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
+import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage} from './apiCalls';
 
-import {showSelectDestinationOptions, showGreeting, getExpenses, showPending, showUpcoming, showPast, showPresent, showHomePage} from './domUpdates';
+import {showSelectDestinationOptions, showGreeting, getExpenses} from './domUpdates';
 
 //global variables
 let currentTraveler;
@@ -62,6 +62,13 @@ const username = document.getElementById('the-username');
 const password = document.getElementById('password');
 
 
+const loginArea = document.getElementById('login-area');
+const tripsArea = document.getElementById('trips-area');
+const presentArea = document.getElementById('present-area');
+const upcomingArea = document.getElementById('upcoming-area');
+const pastArea = document.getElementById('past-area');
+const pendingArea = document.getElementById('pending-area');
+
 //event listeners
 
 // window.addEventListener('load', fetchData);
@@ -103,16 +110,13 @@ function parseValues(data) {
   data[0].travelers.forEach(traveler => allTravelerData.push(traveler));
   data[1].trips.forEach(trip => allTripData.push(trip));
   data[2].destinations.forEach(destination => allDestinationData.push(destination));
-  // console.log(allTravelerData)
-  // console.log(allTripData)
-  // console.log(allDestinationData)
+
   createCurrentTravelerAndTrips()
 }
 
 function createCurrentTravelerAndTrips() {
   let travelersRepo = new TravelersRepo(allTravelerData);
   currentTraveler = travelersRepo.getDataByTravelerId(userNumber);
-  console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
   getExpenses(tripsRepo, currentTraveler, allDestinationData);
   showSelectDestinationOptions(allDestinationData);
@@ -123,23 +127,28 @@ function createCurrentTravelerAndTrips() {
   getPendingTrips();
 }
 
-//**// function showSelectDestinationOptions() {
-//   allDestinationData.forEach(destination => {
-//     destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
-//     <select name="destinations"><option value="${destination.destination}" id="${destination.id}">${destination.destination}</option></select`
-//   })
-//
-// }
+function fetchNewData() {
+  Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
+  .then(values => parseNewValues(values))
+}
 
-// function getExpenses() {
-//   let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(currentTraveler.id, allDestinationData)
-//   yearExpenses.innerText = `Amount spent on trips this year: $${userExpenses.toFixed(2)}`
-//
-//   getPastTrips();
-//   getPresentTrips();
-//   getUpcomingTrips();
-//   getPendingTrips();
-// }
+function parseNewValues(data) {
+  allTravelerData = [];
+  allTripData = [];
+  allDestinationData = [];
+  data[0].travelers.forEach(traveler => allTravelerData.push(traveler));
+  data[1].trips.forEach(trip => allTripData.push(trip));
+  data[2].destinations.forEach(destination => allDestinationData.push(destination));
+
+  let travelersRepo = new TravelersRepo(allTravelerData);
+  currentTraveler = travelersRepo.getDataByTravelerId(userNumber);
+  tripsRepo = new Trips(allTripData);
+
+  getPastTrips();
+  getPresentTrips();
+  getUpcomingTrips();
+  getPendingTrips();
+}
 
 function getPastTrips() {
   let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id);
@@ -231,7 +240,7 @@ function getPendingTrips() {
   let pendingDestinations = tripsRepo.getTravelerPendingDestinations(currentTraveler.id, allDestinationData);
 
   let loopCounter = 1;
-  // pendingContainer.innerHTML = '';
+  pendingContainer.innerHTML = '';
   if (pendingDestinations.length > 0) {
     pendingDestinations.forEach(destination => {
     pendingTrips.forEach(trip => {
@@ -287,90 +296,60 @@ function getPendingTrips() {
       }
     })
 
-    let object = { "id": tripIdValue += 1, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending", "suggestedActivities": []}
-
+    let object = { "id": Date.now(), "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": parseInt(travelersSelect.value), "date": date, "duration": parseInt(daysSelect.value), "status": "pending", "suggestedActivities": []}
+    console.log("OBJECT>>>", object)
     // bookedTrip.push(object)
     // allTripData.push(object)
     // postTripData(bookedTrip[bookedTrip.length - 1]);
     postTripData(object);
-    allTripData.push(object)
+    // allTripData.push(object)
     tripForm.reset();
-    // tripIdValue += 2;
-    fetchData();
-
-    // fetchNewData();
   }
 
+  function showPending() {
+    fetchNewData()
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.remove('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+  }
 
+  function showUpcoming() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.remove('hidden');
+    pastArea.classList.add('hidden');
+  }
 
-   // function showGreeting() {
-   //   greeting.innerText = `Welcome, ${currentTraveler.name}!`
-   // }
+  function showPast() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.remove('hidden');
+  }
 
+  function showPresent() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.remove('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+  }
 
-   // function fetchNewData() {
-   //   // allTravelerData = [];
-   //   // allTripData = [];
-   //   // allDestinationData = [];
-   //   Promise.all([getAllTripsData()])
-   //   .then(values => allTripData.push(values.newTrip))
-   //   createCurrentTravelerAndTrips2()
-   //
-   //     // console.log("THE VALUES>>>>", values, "All traveler data>>>>", allTravelerData, "All destination data>>>", allDestinationData))
-   //   // .then(values => console.log("THE new Values>>>", values))
-   // }
-
-   // function parseNewValues(data) {
-   //   // allTravelerData = [];
-   //   // allTripData = [];
-   //   // allDestinationData = [];
-   //   // data[0].travelers.forEach(traveler => allTravelerData.push(traveler));
-   //   // data[0].travelers.forEach(traveler => {
-   //   //   if (!allTravelerData.includes(traveler)) {
-   //   //     allTravelerData.push(traveler);
-   //   //   }
-   //   // })
-   // // data[0].trips.forEach(trip => allTripData.push(trip));
-   // // let newSet = new Set(allTripData);
-   // // allTripData = [...newSet];
-   // // console.log(allTripData)
-   //   // allTripData.slice(0, 51);
-   //   // data[2].destinations.forEach(destination => {
-   //   //   if (!allDestinationData.includes(destination)) {
-   //   //     allDestinationData.push(destination);
-   //   //   }
-   //   // })
-   //   // data[2].destinations.forEach(destination => allDestinationData.push(destination));
-   //   createCurrentTravelerAndTrips2()
-   //   // getPendingTrips()
-   //   // getPastTrips();
-   //   // getPresentTrips();
-   //   // getUpcomingTrips();
-   //   // getPendingTrips();
-   // }
-
-   // function createCurrentTravelerAndTrips2() {
-   //   let travelersRepo = new TravelersRepo(allTravelerData);
-   //   currentTraveler = travelersRepo.getDataByTravelerId(userNumber);
-   //   console.log("CURRENT TRAVELER>>>", currentTraveler);
-   //   console.log("******", tripsRepo)
-   //   tripsRepo = new Trips(allTripData)
-   //   // tripsRepo.data.slice(0, 51);
-   //   // console.log("******", theTripsRepo)
-   //   // tripsRepo = theTripsRepo.data.slice(0, 51);
-   //   console.log("******", tripsRepo)
-   //   // tripsRepo.slice(51)
-   //   // getPastTrips();
-   //   // getPresentTrips();
-   //   // getUpcomingTrips();
-   //   getPendingTrips();
-   // }
-
-   // function fetchTraveler() {
-   //   Promise.all([getTravelerAtLogin(userNumber)])
-   //   .then(values => console.log(values))
-   // }
-
-   // function parseTravelerData() {
-   //   data[0]
-   // }
+  function showHomePage() {
+    console.log("CLICKED")
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+    tripsArea.classList.remove('hidden');
+  }

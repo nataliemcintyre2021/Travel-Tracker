@@ -3,8 +3,13 @@ export const getAllTravelersData = () => {
   // .then(response => response.json())
   .then(response => checkForErrors(response))
   .then(data => data)
+  console.log("RESPONSE>>",response)
+  console.log("DATA>>",data)
   // .catch(err => console.log(err, 'Traveler data error'))
-  .catch(err => displayErrorMessage(err), console.log("Travelers data error"))
+  .catch(err => {
+    displayErrorMessage(err)
+    console.log("Travelers data error")
+  })
 }
 
 export const getAllTripsData = () => {
@@ -13,7 +18,10 @@ export const getAllTripsData = () => {
   .then(response => checkForErrors(response))
   .then(data => data)
   // .catch(err => console.log(err, 'Trip data error'))
-  .catch(err => displayErrorMessage(err), console.log("Trip data error"))
+  .catch(err => {
+    displayErrorMessage(err)
+    console.log("Trip data error")
+  })
 }
 
 export const getAllDestinationsData = () => {
@@ -22,15 +30,18 @@ export const getAllDestinationsData = () => {
   .then(response => checkForErrors(response))
   .then(data => data)
   // .catch(err => console.log(err, 'Destinations data error'))
-  .catch(err => displayErrorMessage(err), console.log("Destinations data error"))
+  .catch(err => {
+    displayErrorMessage(err)
+    console.log("Destinations data error")
+  })
 }
 
-export const getTravelerAtLogin = (userNumber) => {
-  return fetch(`http://localhost:3001/api/v1/travelers/${userNumber}`)
-    .then(response => checkForErrors(response))
-    .then(data => data)
-    .catch(err => displayErrorMessage(err), console.log("Get traveler at login error"))
-}
+// export const getTravelerAtLogin = (userNumber) => {
+//   return fetch(`http://localhost:3001/api/v1/travelers/${userNumber}`)
+//     .then(response => checkForErrors(response))
+//     .then(data => data)
+//     .catch(err => displayErrorMessage(err), console.log("Get traveler at login error"))
+// }
 
 export const postTripData = (object) => {
   return fetch ('http://localhost:3001/api/v1/trips', {
@@ -40,18 +51,24 @@ export const postTripData = (object) => {
       'Content-Type': 'application/json'
     }
   })
+  // .then(response => console.log(response))
   .then(response => checkForErrors(response))
   .then(json => json)
-  // .then(getAllTripsData())
-  .catch(err => displayErrorMessage(err), console.log("Post trip error"))
+  // .then(fetch())
+  .catch(err => {
+    displayErrorMessage(err)
+    console.log("Post trip error")
+  })
 }
 
 export const checkForErrors = (response) => {
-  // console.log(response);
+  console.log("THEResponse>>>", response);
   if (!response.ok) {
     throw new Error(`${response.status} - something went wrong. ${response.statusText}`);
     // displayErrorMessage()
-  }
+  } //else if (response.statusText === "Created") {
+  //
+  // }
   return response.json()
 }
 
