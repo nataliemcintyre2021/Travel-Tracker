@@ -18,7 +18,6 @@ export function showSelectDestinationOptions(data) {
     destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
     <select name="destinations"><option value="${destination.destination}" id="${destination.id}">${destination.destination}</option></select`
   })
-  console.log("THEDESTINATIONS>", data)
 
 }
 

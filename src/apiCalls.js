@@ -3,6 +3,8 @@ export const getAllTravelersData = () => {
   // .then(response => response.json())
   .then(response => checkForErrors(response))
   .then(data => data)
+  console.log("RESPONSE>>",response)
+  console.log("DATA>>",data)
   // .catch(err => console.log(err, 'Traveler data error'))
   .catch(err => displayErrorMessage(err), console.log("Travelers data error"))
 }
@@ -25,12 +27,12 @@ export const getAllDestinationsData = () => {
   .catch(err => displayErrorMessage(err), console.log("Destinations data error"))
 }
 
-export const getTravelerAtLogin = (userNumber) => {
-  return fetch(`http://localhost:3001/api/v1/travelers/${userNumber}`)
-    .then(response => checkForErrors(response))
-    .then(data => data)
-    .catch(err => displayErrorMessage(err), console.log("Get traveler at login error"))
-}
+// export const getTravelerAtLogin = (userNumber) => {
+//   return fetch(`http://localhost:3001/api/v1/travelers/${userNumber}`)
+//     .then(response => checkForErrors(response))
+//     .then(data => data)
+//     .catch(err => displayErrorMessage(err), console.log("Get traveler at login error"))
+// }
 
 export const postTripData = (object) => {
   return fetch ('http://localhost:3001/api/v1/trips', {
