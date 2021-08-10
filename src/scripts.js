@@ -12,7 +12,7 @@ import TravelersRepo from './TravelersRepo';
 
 import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
 
-import {showSelectDestinationOptions, showGreeting, getExpenses, showUpcoming, showPast, showPresent, showHomePage} from './domUpdates';
+import {showSelectDestinationOptions, showGreeting, getExpenses} from './domUpdates';
 
 //global variables
 let currentTraveler;
@@ -124,6 +124,29 @@ function createCurrentTravelerAndTrips() {
   getExpenses(tripsRepo, currentTraveler, allDestinationData);
   showSelectDestinationOptions(allDestinationData);
   showGreeting(currentTraveler);
+  getPastTrips();
+  getPresentTrips();
+  getUpcomingTrips();
+  getPendingTrips();
+}
+
+function fetchNewData() {
+  Promise.all([getAllTravelersData(), getAllTripsData(), getAllDestinationsData()])
+  .then(values => parseNewValues(values))
+}
+
+function parseNewValues(data) {
+  allTravelerData = [];
+  allTripData = [];
+  allDestinationData = [];
+  data[0].travelers.forEach(traveler => allTravelerData.push(traveler));
+  data[1].trips.forEach(trip => allTripData.push(trip));
+  data[2].destinations.forEach(destination => allDestinationData.push(destination));
+
+  let travelersRepo = new TravelersRepo(allTravelerData);
+  currentTraveler = travelersRepo.getDataByTravelerId(userNumber);
+  tripsRepo = new Trips(allTripData);
+
   getPastTrips();
   getPresentTrips();
   getUpcomingTrips();
@@ -328,13 +351,51 @@ function getPendingTrips() {
   ////MOVED FROM DOM UPDATES TO TEST
 
   function showPending() {
-    fetchData()
+    fetchNewData()
     loginArea.classList.add('hidden');
     tripsArea.classList.add('hidden');
     pendingArea.classList.remove('hidden')
     presentArea.classList.add('hidden');
     upcomingArea.classList.add('hidden');
     pastArea.classList.add('hidden');
+  }
+
+  function showUpcoming() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.remove('hidden');
+    pastArea.classList.add('hidden');
+  }
+
+  function showPast() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.remove('hidden');
+  }
+
+  function showPresent() {
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.remove('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+  }
+
+  function showHomePage() {
+    console.log("CLICKED")
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.add('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+    tripsArea.classList.remove('hidden');
   }
 
    // function showGreeting() {

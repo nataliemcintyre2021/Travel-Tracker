@@ -46,40 +46,40 @@ export function getExpenses(theTripsRepo, traveler, destinationData) {
 //   pastArea.classList.add('hidden');
 // }
 
-export function showUpcoming() {
-  loginArea.classList.add('hidden');
-  tripsArea.classList.add('hidden');
-  pendingArea.classList.add('hidden')
-  presentArea.classList.add('hidden');
-  upcomingArea.classList.remove('hidden');
-  pastArea.classList.add('hidden');
-}
-
-export function showPast() {
-  loginArea.classList.add('hidden');
-  tripsArea.classList.add('hidden');
-  pendingArea.classList.add('hidden')
-  presentArea.classList.add('hidden');
-  upcomingArea.classList.add('hidden');
-  pastArea.classList.remove('hidden');
-}
-
-export function showPresent() {
-  loginArea.classList.add('hidden');
-  tripsArea.classList.add('hidden');
-  pendingArea.classList.add('hidden')
-  presentArea.classList.remove('hidden');
-  upcomingArea.classList.add('hidden');
-  pastArea.classList.add('hidden');
-}
-
-export function showHomePage() {
-  console.log("CLICKED")
-  loginArea.classList.add('hidden');
-  tripsArea.classList.add('hidden');
-  pendingArea.classList.add('hidden')
-  presentArea.classList.add('hidden');
-  upcomingArea.classList.add('hidden');
-  pastArea.classList.add('hidden');
-  tripsArea.classList.remove('hidden');
-}
+// export function showUpcoming() {
+//   loginArea.classList.add('hidden');
+//   tripsArea.classList.add('hidden');
+//   pendingArea.classList.add('hidden')
+//   presentArea.classList.add('hidden');
+//   upcomingArea.classList.remove('hidden');
+//   pastArea.classList.add('hidden');
+// }
+//
+// export function showPast() {
+//   loginArea.classList.add('hidden');
+//   tripsArea.classList.add('hidden');
+//   pendingArea.classList.add('hidden')
+//   presentArea.classList.add('hidden');
+//   upcomingArea.classList.add('hidden');
+//   pastArea.classList.remove('hidden');
+// }
+//
+// export function showPresent() {
+//   loginArea.classList.add('hidden');
+//   tripsArea.classList.add('hidden');
+//   pendingArea.classList.add('hidden')
+//   presentArea.classList.remove('hidden');
+//   upcomingArea.classList.add('hidden');
+//   pastArea.classList.add('hidden');
+// }
+//
+// export function showHomePage() {
+//   console.log("CLICKED")
+//   loginArea.classList.add('hidden');
+//   tripsArea.classList.add('hidden');
+//   pendingArea.classList.add('hidden')
+//   presentArea.classList.add('hidden');
+//   upcomingArea.classList.add('hidden');
+//   pastArea.classList.add('hidden');
+//   tripsArea.classList.remove('hidden');
+// }
