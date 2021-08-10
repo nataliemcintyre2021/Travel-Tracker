@@ -12,6 +12,8 @@ import TravelersRepo from './TravelersRepo';
 
 import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
 
+import {showSelectDestinationOptions, showGreeting, getExpenses, showPending, showUpcoming, showPast, showPresent, showHomePage} from './domUpdates';
+
 //global variables
 let currentTraveler;
 let userNumber;
@@ -24,12 +26,12 @@ let bookedTrip = [];
 
 //querySelectors
 
-const yearExpenses = document.getElementById('yearly-expenses');
+// const yearExpenses = document.getElementById('yearly-expenses');
 const upcomingContainer = document.getElementById('upcoming');
 const pastContainer = document.getElementById('past');
 const presentContainer = document.getElementById('present');
 const pendingContainer = document.getElementById('pending');
-const destinationSelector = document.getElementById('destination-selector');
+// const destinationSelector = document.getElementById('destination-selector');
 
 const pendingButton = document.getElementById('pending-btn');
 const upcomingButton = document.getElementById('upcoming-btn');
@@ -41,13 +43,6 @@ const logoButton3 = document.getElementById('logo3');
 const logoButton4 = document.getElementById('logo4');
 const submitButton = document.getElementById('submit-new');
 const submitTripButton = document.getElementById('post-new');
-
-const loginArea = document.getElementById('login-area');
-const tripsArea = document.getElementById('trips-area');
-const presentArea = document.getElementById('present-area');
-const upcomingArea = document.getElementById('upcoming-area');
-const pastArea = document.getElementById('past-area');
-const pendingArea = document.getElementById('pending-area');
 
 const pastMessage = document.getElementById('past-message');
 const upcomingMessage = document.getElementById('upcoming-message');
@@ -119,28 +114,32 @@ function createCurrentTravelerAndTrips() {
   currentTraveler = travelersRepo.getDataByTravelerId(userNumber);
   console.log("CURRENT TRAVELER>>>", currentTraveler);
   tripsRepo = new Trips(allTripData);
-  getExpenses();
-  showSelectDestinationOptions();
-  showGreeting();
-}
-
-function showSelectDestinationOptions() {
-  allDestinationData.forEach(destination => {
-    destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
-    <select name="destinations"><option value="${destination.destination}" id="${destination.id}">${destination.destination}</option></select`
-  })
-
-}
-
-function getExpenses() {
-  let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(currentTraveler.id, allDestinationData)
-  yearExpenses.innerText = `Amount spent on trips this year: $${userExpenses.toFixed(2)}`
-
+  getExpenses(tripsRepo, currentTraveler, allDestinationData);
+  showSelectDestinationOptions(allDestinationData);
+  showGreeting(currentTraveler);
   getPastTrips();
   getPresentTrips();
   getUpcomingTrips();
   getPendingTrips();
 }
+
+//**// function showSelectDestinationOptions() {
+//   allDestinationData.forEach(destination => {
+//     destinationSelector.innerHTML += `<label for="destinations">Select Destination:</label>
+//     <select name="destinations"><option value="${destination.destination}" id="${destination.id}">${destination.destination}</option></select`
+//   })
+//
+// }
+
+// function getExpenses() {
+//   let userExpenses = tripsRepo.getLastYearsTravelersTripExpenses(currentTraveler.id, allDestinationData)
+//   yearExpenses.innerText = `Amount spent on trips this year: $${userExpenses.toFixed(2)}`
+//
+//   getPastTrips();
+//   getPresentTrips();
+//   getUpcomingTrips();
+//   getPendingTrips();
+// }
 
 function getPastTrips() {
   let pastTrips = tripsRepo.getTravelerPastTrips(currentTraveler.id);
@@ -288,74 +287,25 @@ function getPendingTrips() {
       }
     })
 
-    let object = { "id": tripIdValue += 2, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending", "suggestedActivities": []}
+    let object = { "id": tripIdValue += 1, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending", "suggestedActivities": []}
 
     // bookedTrip.push(object)
     // allTripData.push(object)
     // postTripData(bookedTrip[bookedTrip.length - 1]);
     postTripData(object);
-    // allTripData.push(object)
-    console.log("POST>>", postTripData(object))
+    allTripData.push(object)
     tripForm.reset();
     // tripIdValue += 2;
     fetchData();
-    console.log("FETCHED>>", fetchData())
-    console.log("ALLTRIPS>>", allTripData)
-    console.log("ALLTRAVELERS>>", allTravelerData)
 
     // fetchNewData();
   }
 
-   function showPending() {
-     loginArea.classList.add('hidden');
-     tripsArea.classList.add('hidden');
-     pendingArea.classList.remove('hidden')
-     presentArea.classList.add('hidden');
-     upcomingArea.classList.add('hidden');
-     pastArea.classList.add('hidden');
-   }
 
-   function showUpcoming() {
-     loginArea.classList.add('hidden');
-     tripsArea.classList.add('hidden');
-     pendingArea.classList.add('hidden')
-     presentArea.classList.add('hidden');
-     upcomingArea.classList.remove('hidden');
-     pastArea.classList.add('hidden');
-   }
 
-   function showPast() {
-     loginArea.classList.add('hidden');
-     tripsArea.classList.add('hidden');
-     pendingArea.classList.add('hidden')
-     presentArea.classList.add('hidden');
-     upcomingArea.classList.add('hidden');
-     pastArea.classList.remove('hidden');
-   }
-
-   function showPresent() {
-     loginArea.classList.add('hidden');
-     tripsArea.classList.add('hidden');
-     pendingArea.classList.add('hidden')
-     presentArea.classList.remove('hidden');
-     upcomingArea.classList.add('hidden');
-     pastArea.classList.add('hidden');
-   }
-
-   function showHomePage() {
-     console.log("CLICKED")
-     loginArea.classList.add('hidden');
-     tripsArea.classList.add('hidden');
-     pendingArea.classList.add('hidden')
-     presentArea.classList.add('hidden');
-     upcomingArea.classList.add('hidden');
-     pastArea.classList.add('hidden');
-     tripsArea.classList.remove('hidden');
-   }
-
-   function showGreeting() {
-     greeting.innerText = `Welcome, ${currentTraveler.name}!`
-   }
+   // function showGreeting() {
+   //   greeting.innerText = `Welcome, ${currentTraveler.name}!`
+   // }
 
 
    // function fetchNewData() {
