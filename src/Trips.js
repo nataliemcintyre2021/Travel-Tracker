@@ -101,7 +101,7 @@ class Trips {
         pendingTrips.push(trip)
       }
     })
-    return pendingTrips;
+    return pendingTrips.sort((a, b) => b.date - a.date);
   }
 
   getTravelerPendingDestinations(userId, destinationData) {
@@ -114,7 +114,7 @@ class Trips {
         }
       })
       return arr;
-    }, [])
+    }, []).sort((a, b) => b.date - a.date)
     return pendingDestinations;
   }
 }
