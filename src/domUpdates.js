@@ -37,14 +37,14 @@ export function getExpenses(theTripsRepo, traveler, destinationData) {
   // getPendingTrips();
 }
 
-export function showPending() {
-  loginArea.classList.add('hidden');
-  tripsArea.classList.add('hidden');
-  pendingArea.classList.remove('hidden')
-  presentArea.classList.add('hidden');
-  upcomingArea.classList.add('hidden');
-  pastArea.classList.add('hidden');
-}
+// export function showPending() {
+//   loginArea.classList.add('hidden');
+//   tripsArea.classList.add('hidden');
+//   pendingArea.classList.remove('hidden')
+//   presentArea.classList.add('hidden');
+//   upcomingArea.classList.add('hidden');
+//   pastArea.classList.add('hidden');
+// }
 
 export function showUpcoming() {
   loginArea.classList.add('hidden');

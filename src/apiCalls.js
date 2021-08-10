@@ -40,9 +40,10 @@ export const postTripData = (object) => {
       'Content-Type': 'application/json'
     }
   })
+  .then(response => console.log(response))
   .then(response => checkForErrors(response))
   .then(json => json)
-  // .then(getAllTripsData())
+  // .then(fetch())
   .catch(err => displayErrorMessage(err), console.log("Post trip error"))
 }
 
@@ -51,7 +52,9 @@ export const checkForErrors = (response) => {
   if (!response.ok) {
     throw new Error(`${response.status} - something went wrong. ${response.statusText}`);
     // displayErrorMessage()
-  }
+  } //else if (response.statusText === "Created") {
+  //
+  // }
   return response.json()
 }
 

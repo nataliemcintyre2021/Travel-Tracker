@@ -12,7 +12,7 @@ import TravelersRepo from './TravelersRepo';
 
 import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
 
-import {showSelectDestinationOptions, showGreeting, getExpenses, showPending, showUpcoming, showPast, showPresent, showHomePage} from './domUpdates';
+import {showSelectDestinationOptions, showGreeting, getExpenses, showUpcoming, showPast, showPresent, showHomePage} from './domUpdates';
 
 //global variables
 let currentTraveler;
@@ -61,6 +61,13 @@ const loginForm = document.getElementById('login-form');
 const username = document.getElementById('the-username');
 const password = document.getElementById('password');
 
+
+const loginArea = document.getElementById('login-area');
+const tripsArea = document.getElementById('trips-area');
+const presentArea = document.getElementById('present-area');
+const upcomingArea = document.getElementById('upcoming-area');
+const pastArea = document.getElementById('past-area');
+const pendingArea = document.getElementById('pending-area');
 
 //event listeners
 
@@ -287,21 +294,48 @@ function getPendingTrips() {
       }
     })
 
-    let object = { "id": tripIdValue += 1, "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": travelersSelect.value, "date": date, "duration": daysSelect.value, "status": "pending", "suggestedActivities": []}
-
+    let object = { "id": Date.now(), "userID": currentTraveler.id, "destinationID": destinationIdValue, "travelers": parseInt(travelersSelect.value), "date": date, "duration": parseInt(daysSelect.value), "status": "pending", "suggestedActivities": []}
+    console.log("OBJECT>>>", object)
     // bookedTrip.push(object)
     // allTripData.push(object)
     // postTripData(bookedTrip[bookedTrip.length - 1]);
     postTripData(object);
-    allTripData.push(object)
+    // allTripData.push(object)
     tripForm.reset();
+
     // tripIdValue += 2;
-    fetchData();
+    // fetchData();
 
     // fetchNewData();
   }
 
 
+  // const postTripData2 = (object) => {
+  //   return fetch ('http://localhost:3001/api/v1/trips', {
+  //     method: 'POST',
+  //     body: JSON.stringify(object),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   .then(response => console.log(response))
+  //   .then(response => checkForErrors(response))
+  //   .then(json => json)
+  //   .then(fetchData())
+  //   .catch(err => displayErrorMessage(err), console.log("Post trip error"))
+  // }
+
+  ////MOVED FROM DOM UPDATES TO TEST
+
+  function showPending() {
+    fetchData()
+    loginArea.classList.add('hidden');
+    tripsArea.classList.add('hidden');
+    pendingArea.classList.remove('hidden')
+    presentArea.classList.add('hidden');
+    upcomingArea.classList.add('hidden');
+    pastArea.classList.add('hidden');
+  }
 
    // function showGreeting() {
    //   greeting.innerText = `Welcome, ${currentTraveler.name}!`
