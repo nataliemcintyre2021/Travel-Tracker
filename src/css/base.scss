@@ -11,8 +11,8 @@ html {
   overflow-y: scroll;
   height: 100%;
   width: 100%;
-  color: black;
-  background: white;
+  color: $text-color;
+  background-color: $background-color;
 }
 
 body {
@@ -78,7 +78,7 @@ body {
   padding: 1em;
   margin: 1em;
   color: black;
-  background-color: white;
+  background-color: $background-color;
   border: .3em solid black;
 }
 
@@ -142,7 +142,7 @@ body {
   transition: all 0.2s;
   cursor: pointer;
   color: black;
-  background-color: white;
+  background-color: $background-color;
 }
 
 .pending-btn:hover,
@@ -151,7 +151,7 @@ body {
 .present-btn:hover,
 .submit-btn:hover,
 .post-btn:hover {
-  background-color: #B0D4F3;
+  background-color: $button-color;
 }
 .year-expenses {
   text-align: center;
