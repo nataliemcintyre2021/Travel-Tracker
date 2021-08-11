@@ -68,6 +68,7 @@ const presentArea = document.getElementById('present-area');
 const upcomingArea = document.getElementById('upcoming-area');
 const pastArea = document.getElementById('past-area');
 const pendingArea = document.getElementById('pending-area');
+const loginError = document.getElementById('login-error');
 
 //event listeners
 
@@ -95,6 +96,8 @@ function logTravelerIn(event) {
   if ((password.value === "travel") && (userNumber > 0 && userNumber <= 50)) {
     showHomePage();
     fetchData();
+  } else {
+    loginError.innerText = `Username or password not valid. Please try again.`
   }
 }
 
