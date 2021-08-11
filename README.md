@@ -61,6 +61,7 @@ This project brings together the learning objectives and goals of Module 2 inclu
   - [Natalie McIntyre](https://github.com/nataliemcintyre2021)
 
   - Code Reviewers: [Mae Duphorne](https://github.com/maeduphorne) and [Maria DelSignore](https://github.com/madhaus4)
+  - Project Manager: [Cassandra Torske](https://github.com/CassandraGoose)
 
 ## Future Iterations
 - Implement an Agent Interaction with ability to log-in to their own dashboard
