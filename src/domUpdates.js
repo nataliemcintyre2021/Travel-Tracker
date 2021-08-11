@@ -1,5 +1,4 @@
 import Trips from './Trips';
-import Traveler from './Traveler';
 import TravelersRepo from './TravelersRepo';
 
 import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
