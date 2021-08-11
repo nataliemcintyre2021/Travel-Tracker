@@ -67,6 +67,16 @@ describe('Trips', () => {
         "suggestedActivities": []
       },
       {
+        "id": 600,
+        "userID": 50,
+        "destinationID": 13,
+        "travelers": 3,
+        "date": "2022/07/04",
+        "duration": 6,
+        "status": "pending",
+        "suggestedActivities": []
+      },
+      {
         "id": 43,
         "userID": 50,
         "destinationID": 42,
@@ -109,6 +119,16 @@ describe('Trips', () => {
           "date": "2022/07/04",
           "duration": 6,
           "status": "approved",
+          "suggestedActivities": []
+        },
+        {
+          "id": 600,
+          "userID": 50,
+          "destinationID": 13,
+          "travelers": 3,
+          "date": "2022/07/04",
+          "duration": 6,
+          "status": "pending",
           "suggestedActivities": []
         },
         {
@@ -451,22 +471,59 @@ describe('Trips', () => {
   })
 
 
-  // it('should return traveler trips that are present', function () {
-  //
-  //   const traveler3PresentTrips = [
-  //     {
-  //       "id": 3,
-  //       "userID": 3,
-  //       "destinationID": 22,
-  //       "travelers": 4,
-  //       "date": "2021/08/04",
-  //       "duration": 17,
-  //       "status": "approved",
-  //       "suggestedActivities": []
-  //     }];
-  //
-  //   const presentTrips = tripsRepo.getTravelerPresentTrips(3);
-  //
-  //   expect(upcomingTrips).to.deep.equal(traveler3PresentTrips);
-  // })
+  it('should return traveler trips that are pending', function () {
+
+    const traveler50PendingTrips = [
+      {
+        "id": 600,
+        "userID": 50,
+        "destinationID": 13,
+        "travelers": 3,
+        "date": "2022/07/04",
+        "duration": 6,
+        "status": "pending",
+        "suggestedActivities": []
+      }];
+
+    const pendingTrips = tripsRepo.getTravelerPendingTrips(50);
+
+    expect(pendingTrips).to.deep.equal(traveler50PendingTrips);
+  })
+
+  it('should return traveler destinations that are pending', function () {
+
+    const destinationData = [
+      {
+        "id":1,
+        "destination":"Lima, Peru",
+        "estimatedLodgingCostPerDay":70,
+        "estimatedFlightCostPerPerson":400,
+        "image":"https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+        "alt":"overview of city buildings with a clear sky"
+      },
+      {
+        "id":13,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      }
+    ];
+
+    const traveler50PendingDestinations = [
+      {
+        "id":13,
+        "destination":"Bangkok, Thailand",
+        "estimatedLodgingCostPerDay":35,
+        "estimatedFlightCostPerPerson":988,
+        "image":"https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+        "alt":"ornate buildings with a garden during the day"
+      }];
+
+    const pendingDestinations = tripsRepo.getTravelerPendingDestinations(50, destinationData);
+
+    expect(pendingDestinations).to.deep.equal(traveler50PendingDestinations);
+  })
+  
 })

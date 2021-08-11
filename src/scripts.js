@@ -1,7 +1,6 @@
 import './css/base.scss';
 import './images/logo-travel.png';
 import Trips from './Trips';
-import Traveler from './Traveler';
 import TravelersRepo from './TravelersRepo';
 import {getAllData, postTripData, checkForErrors, displayErrorMessage} from './apiCalls';
 import {showSelectDestinationOptions, showGreeting, getExpenses} from './domUpdates';
