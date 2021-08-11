@@ -26,8 +26,9 @@
           <input type="text" name="password" id="password" required/>
         </div>
         <div class="submit">
-          <input type="submit" value="Log In"/>
+          <input class="logged-in" type="submit" value="Log In"/>
         </div>
+        <p class="login-error"id="login-error"></p>
       </form>
     </main>
   </section>
@@ -51,15 +52,15 @@
           </div>
           <div class="duration-input">
             <label for="days-select" class="duration-text">Number of Days: </label>
-            <input id="days-select" type="number" name="duration" min="1" required/>
+            <input class="days-select" id="days-select" type="number" name="duration" min="1" required/>
           </div>
           <div class="number-travelers">
             <label for="travelers-select" class="travelers-text">Number of Travelers: </label>
-            <input id="travelers-select" type="number" name="number-of-travelers" min="1" required/>
+            <input class="travelers-select" id="travelers-select" type="number" name="number-of-travelers" min="1" required/>
           </div>
           <div class="selector">
             <label for="destination-selector" class="destinations-text">Select Destination:</label>
-            <select id="destination-selector" name="destinations" required>
+            <select class="destination-selector" id="destination-selector" name="destinations" required>
               <option id ="destination-select"></option>
               <!-- <option value="Destination">Destination</option>
               <option value="Destination">Destination</option>
