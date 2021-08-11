@@ -1,12 +1,7 @@
-// @import './_normalize.css';
+@import './_normalize.scss';
+@import './_mixins.scss';
+@import './_variables.scss';
 
-// *,
-// *:after,
-// *:before {
-//   box-sizing: border-box;
-//   margin: 0px;
-//   padding: 0px;
-// }
 
 * {
   font-family: 'Bitter', serif;
@@ -27,12 +22,10 @@ body {
 }
 
 .login-page {
+  @include center-items();
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .username,
@@ -65,11 +58,10 @@ body {
 }
 
 .request-form {
+  @include center-items();
   margin: 0;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+
 }
 
 .book-trip {
@@ -79,10 +71,8 @@ body {
 }
 
 .make-trip-form {
-  display: flex;
-  flex-direction: column;
+  @include center-items();
   justify-content: center;
-  align-items: center;
   width: 30em;
   border-radius: 5%;
   padding: 1em;
@@ -119,17 +109,14 @@ body {
   max-width: 160px;
 }
 
-
 .submit-trip {
   margin: 5px;
   cursor: pointer;
 }
 
 .all-trips {
-  display: flex;
-  flex-direction: column;
+  @include center-items();
   justify-content: space-around;
-  align-items: center;
 }
 
 .trip-buttons {
@@ -175,9 +162,7 @@ body {
 .present-trip-section,
 .upcoming-trip-section,
 .past-trip-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include center-items();
   margin: 2px;
   padding: 2px;
 }
@@ -223,40 +208,12 @@ body {
 
 /* mobile size */
 @media screen and (max-width: 425px) {
-
-  .make-trip-form {
-    width: 15em;
-  }
-
-  .pending-container,
-  .present-container,
-  .upcoming-container,
-  .past-container {
-    display: grid;
-    grid-template-rows: repeat(1, 1fr);
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 80px;
-    height: 30vh;
-    width: 55vw;
-    font-size: 12px;
-  }
+  @include mobile-screen();
 }
 
 /* tablet size */
 @media screen and (min-width: 700px) and (max-width: 1030px) {
-
-  .pending-container,
-  .present-container,
-  .upcoming-container,
-  .past-container {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 80px;
-    height: 30vh;
-    width: 55vw;
-    font-size: 15px;
-  }
+  @include tablet-screen();
 }
 
 /* hidden */
