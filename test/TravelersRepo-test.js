@@ -35,7 +35,6 @@ describe('Travelers Repo', () => {
 
   it('should give user data based on traveler ID', function () {
     const specificTraveler = repoData.getDataByTravelerId(3);
-
     expect(specificTraveler).to.deep.equal(repoData.data[2]);
   })
 
