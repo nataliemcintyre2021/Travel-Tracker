@@ -1,12 +1,5 @@
 // @import './_normalize.css';
 
-/* This is an example of using Sass, otherwise plain CSS works too*/
-// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-// ;
-//
-// body {
-//   background: $primary-background;
-// }
 // *,
 // *:after,
 // *:before {
@@ -21,15 +14,9 @@
 
 html {
   overflow-y: scroll;
-  // overflow-x: scroll;
   height: 100%;
   width: 100%;
-  // background: #F0803C;
-  // background: #EE701E;
-  // background: #f6bd60;
-  // color: #434952;
   color: black;
-  // color: #edf6f9;
   background: white;
 
 }
@@ -37,28 +24,16 @@ html {
 body {
   height: 100%;
   width: 100%;
-  // background: #EE701E;
-  // color: #434952;
   color: black;
-  // color: #edf6f9;
-  // background-image: linear-gradient(#f58320,#dd3a12);
-  // color: #ebedef;
-  // border-bottom: 10px solid #BCE8A6;
 }
-
-// body {
-//   background: #F0803C;
-// }
 
 .login-page {
   height: 100%;
   width: 100%;
-  // border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .username,
@@ -66,6 +41,13 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.login-error {
+  max-width: 10em;
+  word-wrap: break-word;
+  color: red;
+}
+
 .submit {
   margin: 5px;
   text-align: center;
@@ -74,11 +56,9 @@ body {
 .greeting {
   text-align: center;
   font-size: 1.5em;
-  // color: #ebedef;
 }
 
 .logo2 {
-  // border: 2px solid black;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -87,7 +67,6 @@ body {
 
 .request-form {
   margin: 0;
-  // border: 3px solid green;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -98,27 +77,19 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  // border: 3px solid purple;
-
 }
+
 .make-trip-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // border: 2px solid black;
   width: 30em;
-  // background-color: #225560;
-  // color: white;
   border-radius: 5%;
   padding: 1em;
   margin: 1em;
-  // padding-right: 3em;
-  // color: #225560;
-  // background-color: white;
   color: black;
   background-color: white;
-  // background-color: #BCE8A6;
   border: .3em solid black;
 }
 
@@ -142,6 +113,13 @@ body {
   font-size: small;
 }
 
+.date-selector,
+.days-select,
+.travelers-select,
+.destination-selector {
+  max-width: 160px;
+}
+
 
 .submit-trip {
   margin: 5px;
@@ -153,8 +131,6 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  // border: 2px solid black;
-  // margin: 1.5em;
 }
 
 .trip-buttons {
@@ -166,28 +142,21 @@ body {
 .past-btn,
 .present-btn,
 .submit-btn,
-.post-btn {
-  // border: 5px solid purple;
-//  border: 0.1em solid #FFFFFF;
-// background-color: #225560;
-// color: white;
-display:inline-block;
-padding:0.35em 1.2em;
-// border:0.1em solid #FFFFFF;
-border: .2em solid black;
-margin:0 0.3em 0.3em 0;
-border-radius:0.12em;
-box-sizing: border-box;
-text-decoration:none;
-font-weight:300;
-// color:#FFFFFF;
-text-align:center;
-transition: all 0.2s;
-cursor: pointer;
-// color: #225560;
-color: black;
-background-color: white;
-
+.post-btn,
+.logged-in {
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border: .2em solid black;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:300;
+  text-align:center;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: black;
+  background-color: white;
 }
 
 .pending-btn:hover,
@@ -196,346 +165,36 @@ background-color: white;
 .present-btn:hover,
 .submit-btn:hover,
 .post-btn:hover {
-  // border: 5px solid purple;
-//  border: 0.1em solid #FFFFFF;
-// background-color: #EE701E;
-background-color: #B0D4F3;
-
+  background-color: #B0D4F3;
 }
-
-
-
-
 .year-expenses {
   text-align: center;
   margin-bottom: 0;
 }
 
-.pending-trip-section {
-  // border: 5px solid red;
+.pending-trip-section,
+.present-trip-section,
+.upcoming-trip-section,
+.past-trip-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2px;
   padding: 2px;
-  // height: 25%
-  // width: 20%;
 }
 
-.pending-container {
-  display: flex;
-  flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
-  // border: 3px solid black;
+.pending-container,
+.present-container,
+.upcoming-container,
+.past-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 5fr 5fr;
-  // position: relative;
-  // overflow: hidden;
-  grid-gap: 10px;
-  grid-template-areas:
-  "pending-trip-1 pending-trip-2 pending-trip-3"
-  "pending-trip-4 pending-trip-5 pending-trip-6"
-}
-
-.pending-trip-1 {
-  background: white;
-  // border-radius: 2px;
-  grid-area: pending-trip-1;
-  // position: relative;
-  // min-width: 10%;
-  // min-height: 10%;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  // margin: 2px;
-  margin: 0;
-}
-
-.pending-trip-2 {
-  background: white;
-  border-radius: 2px;
-  grid-area: pending-trip-2;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.pending-trip-3 {
-  background: white;
-  border-radius: 2px;
-  grid-area: pending-trip-3;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.pending-trip-4 {
-  background: white;
-  border-radius: 2px;
-  grid-area: pending-trip-4;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.pending-trip-5 {
-  background: white;
-  border-radius: 2px;
-  grid-area: pending-trip-5;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.pending-trip-6 {
-  // border: 2px solid purple;
-  background: white;
-  border-radius: 2px;
-  grid-area: pending-trip-6;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.present-trip-section {
-  // border: 5px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2px;
-  padding: 2px;
-  // height: 25%
-  // width: 20%;
-}
-
-.present-container {
-  display: flex;
-  flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
-  // border: 3px solid black;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 5fr 5fr;
-  // position: relative;
-  // overflow: hidden;
-  grid-gap: 10px;
-  grid-template-areas:
-  "present-trip-1 present-trip-2 present-trip-3"
-  "present-trip-4 present-trip-5 present-trip-6"
-}
-
-.present-trip-1 {
-  background: white;
-  // border-radius: 2px;
-  grid-area: present-trip-1;
-  // position: relative;
-  // min-width: 10%;
-  // min-height: 10%;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  // margin: 2px;
-  margin: 0;
-}
-
-.present-trip-2 {
-  background: white;
-  border-radius: 2px;
-  grid-area: present-trip-2;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.present-trip-3 {
-  background: white;
-  border-radius: 2px;
-  grid-area: present-trip-3;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.present-trip-4 {
-  background: white;
-  border-radius: 2px;
-  grid-area: present-trip-4;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.present-trip-5 {
-  background: white;
-  border-radius: 2px;
-  grid-area: present-trip-5;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.present-trip-6 {
-  // border: 2px solid purple;
-  background: white;
-  border-radius: 2px;
-  grid-area: present-trip-6;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-
-
-
-.upcoming-trip-section {
-  // border: 5px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2px;
-  padding: 2px;
-  // height: 25%
-  // width: 20%;
-}
-
-.upcoming-container {
-  display: flex;
-  flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
-  // border: 3px solid black;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 5fr 5fr;
-  // position: relative;
-  // overflow: hidden;
-  grid-gap: 10px;
-  grid-template-areas:
-  "upcoming-trip-1 upcoming-trip-2 upcoming-trip-3"
-  "upcoming-trip-4 upcoming-trip-5 upcoming-trip-6"
-}
-
-.upcoming-trip-1 {
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-1;
-  position: relative;
-  min-width: 10%;
-  min-height: 10%;
-  object-fit: fill;
-  height: 35vh;
-  width: 30vw;
-  margin: 2px;
-  margin: 0;
-}
-
-.upcoming-trip-2 {
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-2;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 35vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.upcoming-trip-3 {
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-3;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.upcoming-trip-4 {
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-4;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.upcoming-trip-5 {
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-5;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.upcoming-trip-6 {
-  // border: 2px solid purple;
-  background: white;
-  border-radius: 2px;
-  grid-area: upcoming-trip-6;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  height: 60vh;
+  width: 70vw;
+  font-size: 15px;
+  word-wrap: break-word;
 }
 
 #img {
@@ -544,10 +203,12 @@ background-color: #B0D4F3;
   object-fit: cover;
   position: relative;
 }
+
 .destination {
   margin: 0;
   padding: 0;
 }
+
 .trip-info {
   display: flex;
   flex-direction: column;
@@ -561,118 +222,45 @@ background-color: #B0D4F3;
   padding: 0;
 }
 
+/* mobile size */
+@media screen and (max-width: 425px) {
 
+  .make-trip-form {
+    width: 15em;
+  }
 
-
-
-.past-trip-section {
-  // border: 5px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2px;
-  padding: 2px;
-  // height: 25%
-  // width: 20%;
+  .pending-container,
+  .present-container,
+  .upcoming-container,
+  .past-container {
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 80px;
+    height: 30vh;
+    width: 55vw;
+    font-size: 12px;
+  }
 }
 
-.past-container {
-  display: flex;
-  flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
-  // border: 3px solid black;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 5fr 5fr;
-  // position: relative;
-  // overflow: hidden;
-  grid-gap: 10px;
-  grid-template-areas:
-  "past-trip-1 past-trip-2 past-trip-3"
-  "past-trip-4 past-trip-5 past-trip-6"
+/* tablet size */
+@media screen and (min-width: 700px) and (max-width: 1030px) {
+
+  .pending-container,
+  .present-container,
+  .upcoming-container,
+  .past-container {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 80px;
+    height: 30vh;
+    width: 55vw;
+    font-size: 15px;
+  }
 }
 
-.past-trip-1 {
-  background: white;
-  // border-radius: 2px;
-  grid-area: past-trip-1;
-  // position: relative;
-  // min-width: 10%;
-  // min-height: 10%;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  // margin: 2px;
-  margin: 0;
-}
-
-.past-trip-2 {
-  background: white;
-  border-radius: 2px;
-  grid-area: past-trip-2;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.past-trip-3 {
-  background: white;
-  border-radius: 2px;
-  grid-area: past-trip-3;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.past-trip-4 {
-  background: white;
-  border-radius: 2px;
-  grid-area: past-trip-4;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.past-trip-5 {
-  background: white;
-  border-radius: 2px;
-  grid-area: past-trip-5;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
-.past-trip-6 {
-  // border: 2px solid purple;
-  background: white;
-  border-radius: 2px;
-  grid-area: past-trip-6;
-  // position: relative;
-  // min-width: 0;
-  // min-height: 0;
-  // object-fit: fill;
-  height: 30vh;
-  width: 30vw;
-  margin: 0;
-}
-
+/* hidden */
 .hidden {
   display: none;
 }
