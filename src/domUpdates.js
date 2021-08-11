@@ -1,8 +1,3 @@
-import Trips from './Trips';
-import TravelersRepo from './TravelersRepo';
-
-import {getAllTravelersData, getAllTripsData, getAllDestinationsData, postTripData, checkForErrors, displayErrorMessage, getTravelerAtLogin} from './apiCalls';
-
 export function showSelectDestinationOptions(data) {
   const destinationSelector = document.getElementById('destination-selector');
   data.forEach(destination => {
@@ -12,6 +7,7 @@ export function showSelectDestinationOptions(data) {
 }
 
 export function showGreeting(traveler) {
+  const greeting = document.getElementById('greeting');
   greeting.innerText = `Welcome, ${traveler.name}!`
 }
 

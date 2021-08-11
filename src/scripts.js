@@ -12,8 +12,6 @@ let tripsRepo;
 let allTravelerData = [];
 let allTripData = [];
 let allDestinationData = [];
-let pendingTrips = [];
-let bookedTrip = [];
 
 //querySelectors
 const upcomingContainer = document.getElementById('upcoming');
@@ -28,13 +26,10 @@ const logoButton1 = document.getElementById('logo1');
 const logoButton2 = document.getElementById('logo2');
 const logoButton3 = document.getElementById('logo3');
 const logoButton4 = document.getElementById('logo4');
-const submitButton = document.getElementById('submit-new');
 const submitTripButton = document.getElementById('post-new');
 const pastMessage = document.getElementById('past-message');
 const upcomingMessage = document.getElementById('upcoming-message');
 const presentMessage = document.getElementById('present-message');
-const pendingMessage = document.getElementById('pending-message');
-const greeting = document.getElementById('greeting');
 const dateSelect = document.getElementById('date-select');
 const daysSelect = document.getElementById('days-select');
 const travelersSelect = document.getElementById('travelers-select');
@@ -223,11 +218,9 @@ function getPendingTrips() {
   function bookTrip(event) {
     event.preventDefault();
     let estimatedCost = '';
-    let destinationIdValue = 0;
 
     allDestinationData.forEach(destination => {
       if (destination["destination"] === destinationSelect.value) {
-        destinationIdValue += destination.id;
         let travelAgentFee = estimatedCost * .1
         let travelCosts = ((travelersSelect.value * destination.estimatedFlightCostPerPerson) + (daysSelect.value * destination.estimatedLodgingCostPerDay));
 
